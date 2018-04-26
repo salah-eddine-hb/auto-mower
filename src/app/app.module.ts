@@ -7,6 +7,7 @@ import { InstructionsExecutorService } from './instructions-executor.service';
 import { FileValidatorService } from './file-validator.service';
 import { FileUploaderComponent } from './file-uploader/file-uploader.component';
 import { MowerPositionComponent } from './mower-position/mower-position.component';
+import { FileUploadService } from './file-upload.service';
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import { MowerPositionComponent } from './mower-position/mower-position.componen
   ],
   providers: [
     FileValidatorService,
+    FileUploadService,
     InstructionsExecutorService
   ],
   bootstrap: [AppComponent]
