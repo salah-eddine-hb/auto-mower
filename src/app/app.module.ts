@@ -6,12 +6,14 @@ import { AppComponent } from './app.component';
 import { InstructionsExecutorService } from './instructions-executor.service';
 import { FileValidatorService } from './file-validator.service';
 import { FileUploaderComponent } from './file-uploader/file-uploader.component';
+import { MowerPositionComponent } from './mower-position/mower-position.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    FileUploaderComponent
+    FileUploaderComponent,
+    MowerPositionComponent
   ],
   imports: [
     BrowserModule
