@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FileValidatorService } from '../file-validator.service';
-import { InstructionsExecutorService } from '../instructions-executor.service';
+import { ExecutorService } from '../executor.service';
 
 @Component({
   selector: 'app-file-uploader',
@@ -10,7 +10,7 @@ import { InstructionsExecutorService } from '../instructions-executor.service';
 export class FileUploaderComponent implements OnInit {
 
   constructor(private fileValidator: FileValidatorService, 
-              private instructionsExecutor: InstructionsExecutorService) 
+              private executorService: ExecutorService) 
   { }
 
   ngOnInit() {
@@ -21,10 +21,10 @@ export class FileUploaderComponent implements OnInit {
     let reader = new FileReader();
     reader.onload = () => {
         let text = reader.result;
-        if(this.fileValidator.validate(text))
-          this.instructionsExecutor.execute(); 
-        else
-          this.instructionsExecutor.execute();
+       // if(this.fileValidator.validate(text))
+          //this.executorService.execute(); 
+        //else
+          //this.executorService.execute();
     }
     reader.readAsText(input.files[0]);
   };
