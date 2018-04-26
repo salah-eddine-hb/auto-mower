@@ -1,8 +1,9 @@
 <div class="form-group">
   <label for="file">Instructions File</label>
   <input type="file"
+         accept='text/plain'
          id="file"
-         (change)="handleFileInput($event.target.files)">
+         (change)="openFile($event)">
 
   <input type="button" value="Submit">
 </div>
