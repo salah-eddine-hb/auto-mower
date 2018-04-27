@@ -11,17 +11,24 @@ export class FileValidatorService {
     let index = 1;
     for (let line of lines) {
       if (index == 1) {
-        if(!this.checkUpperRightCorner(line)) 
-          return false;
+        if(this.checkUpperRightCorner(line) == false) {
+          console.log('error at line '+ index)
+          //return false;
+        }
       }
       else {
           if (index % 2 == 0){
-            if(!this.checkStartingPositionAndOrientation(line)) 
-              return false;
+            if(this.checkStartingPositionAndOrientation(line) == false) {
+              console.log('error at line '+ index)
+              //return false;
+            }
+              
           }
           else{
-             if(!this.checkStartingPositionAndOrientation(line)) 
-              return false;
+             if(this.checkStartingPositionAndOrientation(line) == false) {
+               console.log('error at line '+ index)
+               //return false;
+             }
           }
       } index++;
     }
@@ -29,18 +36,21 @@ export class FileValidatorService {
   }
 
   private checkUpperRightCorner(data: string): boolean{
-    let regex = /^[0-9]\d{2}$/g
-    return regex.test(data);
+    let regex = /^[0-9]{2}$/g
+    let result = regex.test(data);
+    return result;
   }
 
   private checkStartingPositionAndOrientation(data: string): boolean{
-    let regex = /^[0-9]\d{2}[NEWS]{1}$/g
-    return regex.test(data);
+    let regex = /^[0-9]{2}[NEWS]{1}$/g
+    let result = regex.test(data);
+    return result;
   }
 
   private checkInstructions(data: string): boolean{
     let regex = /^[ADG]+$/g
-    return regex.test(data);
+    let result = regex.test(data);
+    return result;
   }
 
 }

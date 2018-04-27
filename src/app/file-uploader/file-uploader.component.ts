@@ -21,10 +21,10 @@ export class FileUploaderComponent implements OnInit {
     let reader = new FileReader();
     reader.onload = () => {
         let text = reader.result;
-       // if(this.fileValidator.validate(text))
-          //this.executorService.execute(); 
-        //else
-          //this.executorService.execute();
+        if(this.fileValidator.validate(text))
+          this.executorService.loadMowers(text);
+        else
+          console.log('Plz check your file.');
     }
     reader.readAsText(input.files[0]);
   };

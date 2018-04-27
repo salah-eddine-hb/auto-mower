@@ -8,6 +8,7 @@ import { FileUploaderComponent } from './file-uploader/file-uploader.component';
 import { MowerPositionComponent } from './mower-position/mower-position.component';
 import { FileUploadService } from './file-upload.service';
 import { ExecutorService } from './executor.service';
+import { LoaderService } from './loader.service';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { ExecutorService } from './executor.service';
   providers: [
     FileValidatorService,
     FileUploadService,
-    ExecutorService
+    ExecutorService,
+    LoaderService
   ],
   bootstrap: [AppComponent]
 })
