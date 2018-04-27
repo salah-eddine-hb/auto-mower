@@ -6,33 +6,27 @@ export class FileValidatorService {
   constructor() { }
 
   //check empty file, file with errors, ...
-  public validate(content: string): boolean{
+  public validate(content: string): string[]{
     const lines = content.toString().split('\n');
+    let errors: string[] =  [];
     let index = 1;
     for (let line of lines) {
       if (index == 1) {
-        if(this.checkUpperRightCorner(line) == false) {
-          console.log('error at line '+ index)
-          //return false;
-        }
+        if(this.checkUpperRightCorner(line) == false)
+          errors.push('error at line '+ index)
       }
       else {
           if (index % 2 == 0){
-            if(this.checkStartingPositionAndOrientation(line) == false) {
-              console.log('error at line '+ index)
-              //return false;
-            }
-              
+            if(this.checkStartingPositionAndOrientation(line) == false)
+              errors.push('error at line '+ index)
           }
           else{
-             if(this.checkStartingPositionAndOrientation(line) == false) {
-               console.log('error at line '+ index)
-               //return false;
-             }
+             if(this.checkInstructions(line) == false)
+              errors.push('error at line '+ index)
           }
       } index++;
     }
-    return true;
+    return errors;
   }
 
   private checkUpperRightCorner(data: string): boolean{
