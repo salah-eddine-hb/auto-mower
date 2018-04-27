@@ -9,26 +9,27 @@ export class LoaderService {
 
   constructor() { }
 
-  /**
-    * Load mowers from the file
-    * and run the Executor to execute instructions
-    */
-   public loadMowers(data: string): Array<Mower> {
-        const lines = data.toString().split('\n');
-        const mowers: Array<Mower> = [];
-        let corner: Position;
-        let mower: Mower;
-        let index = 1;
-        for (let line of lines) {
-            if (index == 1) corner = this.getCorners(line);
+/**
+* Load mowers from the file
+* @param data - A string represent the file
+* @returns An array of mower
+*/
+public loadMowers(data: string): Array<Mower> {
+    const lines = data.toString().split('\n');
+    const mowers: Array<Mower> = [];
+    let corner: Position;
+    let mower: Mower;
+    let index = 1;
+    for (let line of lines) {
+        if (index == 1) corner = this.getCorners(line);
+        else {
+            if (index % 2 == 0) mower = this.getMower(line);
             else {
-                if (index % 2 == 0) mower = this.getMower(line);
-                else {
-                    mower.Instructions = this.getCommands(line);
-                    mowers.push(mower);
-                }
-            } index++;
-        } return mowers;
+                mower.Instructions = this.getCommands(line);
+                mowers.push(mower);
+            }
+        } index++;
+    } return mowers;
 }
 
 /**
@@ -66,7 +67,7 @@ private getMower(data: string): Mower {
             orientation = Orientation.WEST;
             break;
         default:
-            break;
+            throw new Error("Error reading data from file, plz check the input");
     }
     mower = new Mower(position, orientation);
     return mower;
@@ -92,8 +93,7 @@ private getCommands(data: string): Array<Instruction> {
                 instructions.push(Instruction.FORWARD);
                 break;
             default:
-                //error
-                break;
+                throw new Error("Error reading data from file, plz check the input");
         }
     } return instructions;
 }

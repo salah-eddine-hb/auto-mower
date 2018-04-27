@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FileValidatorService } from '../file-validator.service';
+import { ValidatorService } from '../validator.service';
 import { ExecutorService } from '../executor.service';
 
 @Component({
@@ -9,7 +9,7 @@ import { ExecutorService } from '../executor.service';
 })
 export class FileUploaderComponent implements OnInit {
 
-  constructor(private fileValidator: FileValidatorService, 
+  constructor(private validatorService: ValidatorService, 
               private executorService: ExecutorService) 
   { }
 
@@ -21,7 +21,7 @@ export class FileUploaderComponent implements OnInit {
     let reader = new FileReader();
     reader.onload = () => {
         let data = reader.result;
-        let errors = this.fileValidator.validate(data);
+        let errors = this.validatorService.validate(data);
         if(errors.length == 0) this.executorService.loadMowers(data);
         else errors.forEach(element => { console.log(element);})
     }

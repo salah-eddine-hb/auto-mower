@@ -3,10 +3,9 @@ import { NgModule } from '@angular/core';
 
 
 import { AppComponent } from './app.component';
-import { FileValidatorService } from './file-validator.service';
 import { FileUploaderComponent } from './file-uploader/file-uploader.component';
 import { MowerPositionComponent } from './mower-position/mower-position.component';
-import { FileUploadService } from './file-upload.service';
+import { ValidatorService } from './validator.service';
 import { ExecutorService } from './executor.service';
 import { LoaderService } from './loader.service';
 
@@ -21,8 +20,7 @@ import { LoaderService } from './loader.service';
     BrowserModule
   ],
   providers: [
-    FileValidatorService,
-    FileUploadService,
+    ValidatorService,
     ExecutorService,
     LoaderService
   ],

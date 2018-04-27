@@ -22,12 +22,11 @@ export class ExecutorService {
        this.execute(mowers,corner);
   }
 
-   /**
-    * Execute the instructions and move the mowers
-    * @param (Mowers, Corner)
-    * 
-    */
-   private execute(mowers: Array<Mower>, corner: Position): void {
+  /**
+  * Execute the instructions and move the mowers
+  * @param (Mowers, Corner)
+  */
+  private execute(mowers: Array<Mower>, corner: Position): void {
     let instructions: Array<Instruction>;
     let instruction: Instruction;
     let mower: Mower;
