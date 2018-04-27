@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
 import { Mower } from './Mower';
 import { Position } from './Position';
+import { Injectable } from '@angular/core';
 import { Orientation } from './Orientation';
 import { Instruction } from './Instruction';
 
@@ -67,7 +67,7 @@ private getMower(data: string): Mower {
             orientation = Orientation.WEST;
             break;
         default:
-            throw new Error("Error reading data from file, plz check the input");
+            throw new Error("Error reading data from file");
     }
     mower = new Mower(position, orientation);
     return mower;
@@ -93,7 +93,7 @@ private getCommands(data: string): Array<Instruction> {
                 instructions.push(Instruction.FORWARD);
                 break;
             default:
-                throw new Error("Error reading data from file, plz check the input");
+                throw new Error("Error reading data from file");
         }
     } return instructions;
 }

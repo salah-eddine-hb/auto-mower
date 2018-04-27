@@ -1,15 +1,14 @@
-import { Injectable } from '@angular/core';
 import { Mower } from './Mower';
+import { Position } from './Position';
+import { Injectable } from '@angular/core';
 import { Instruction } from './Instruction';
 import { Orientation } from './Orientation';
-import { Position } from './Position';
 import { LoaderService } from './loader.service';
 
 @Injectable()
 export class ExecutorService {
 
   constructor(private loaderService: LoaderService) { }
-
 
   /**
   * Move the mower to the Right, Left or Forward
