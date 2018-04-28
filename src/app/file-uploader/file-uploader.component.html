@@ -3,9 +3,9 @@
   <input type="file"
          accept='text/plain'
          id="file"
-         (change)="openFile($event)">
+         #file>
 
-  <input type="button" value="Submit">
+  <input type="button" (click)="openFile(file.files)" value="Submit">
 </div>
 <div>
   <p *ngFor="let result of results">{{result}}</p>

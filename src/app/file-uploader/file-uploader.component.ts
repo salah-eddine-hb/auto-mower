@@ -16,16 +16,15 @@ export class FileUploaderComponent implements OnInit {
   ngOnInit() {
   }
 
-  openFile(event) {
-    let input = event.target;
+  openFile(files) {
     let reader = new FileReader();
     reader.onload = () => {
         let data = reader.result;
         let errors = this.validatorService.validate(data);
-        if(errors.length == 0) this.results = this.executorService.loadMowers(data);
+        if(errors.length == 0) 
+          this.results = this.executorService.loadMowers(data);
         else this.results = errors;
     }
-    reader.readAsText(input.files[0]);
-  };
-
-}
+    reader.readAsText(files[0]);
+    };
+  }
