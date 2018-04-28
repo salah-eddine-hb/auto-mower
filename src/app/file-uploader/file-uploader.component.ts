@@ -8,7 +8,7 @@ import { ExecutorService } from '../executor.service';
   styleUrls: ['./file-uploader.component.css']
 })
 export class FileUploaderComponent implements OnInit {
-
+  results: string[];
   constructor(private validatorService: ValidatorService, 
               private executorService: ExecutorService) 
   { }
@@ -22,8 +22,8 @@ export class FileUploaderComponent implements OnInit {
     reader.onload = () => {
         let data = reader.result;
         let errors = this.validatorService.validate(data);
-        if(errors.length == 0) this.executorService.loadMowers(data);
-        else errors.forEach(element => { console.log(element);})
+        if(errors.length == 0) this.results = this.executorService.loadMowers(data);
+        else this.results = errors;
     }
     reader.readAsText(input.files[0]);
   };
