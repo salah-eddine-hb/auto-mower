@@ -16,8 +16,12 @@ export class FileUploaderComponent implements OnInit {
   ngOnInit() {
   }
 
-  openFile(files) {
+  openFile(files: FileList) {
     let reader = new FileReader();
+    reader.onerror = () => {
+      //this.results = ['Plz upload a file'];
+      console.log('error');
+    }
     reader.onload = () => {
         let data = reader.result;
         let errors = this.validatorService.validate(data);

@@ -16,16 +16,16 @@ export class ValidatorService {
     let index = 1;
     for (let line of lines) {
       if (index == 1) {
-        if(this.checkUpperRightCorner(line) == false) 
+        if(!this.checkUpperRightCorner(line)) 
           errors.push('error at line '+ index)
       }
       else {
           if (index % 2 == 0){
-            if(this.checkStartingPositionAndOrientation(line) == false) 
+            if(!this.checkStartingPositionAndOrientation(line)) 
               errors.push('error at line '+ index)
           }
           else
-             if(this.checkInstructions(line) == false) 
+             if(!this.checkInstructions(line)) 
               errors.push('error at line '+ index)  
       }index++;
     }
