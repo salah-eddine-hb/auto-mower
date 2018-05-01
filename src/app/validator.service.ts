@@ -39,8 +39,8 @@ export class ValidatorService {
   * @returns test result
   */
   private checkUpperRightCorner(data: string): boolean{
-    let regex = /^[0-9]{2}$/g
-    let result = regex.test(data);
+    const regex = /^[0-9]{2}$/g
+    const result = regex.test(data);
     return result;
   }
 
@@ -51,8 +51,8 @@ export class ValidatorService {
   * @returns test result
   */
   private checkStartingPositionAndOrientation(data: string): boolean{
-    let regex = /^[0-9]{2}[NEWS]{1}$/g
-    let result = regex.test(data);
+    const regex = /^[0-9]{2}[NEWS]{1}$/g
+    const result = regex.test(data);
     return result;
   }
 
@@ -63,8 +63,8 @@ export class ValidatorService {
   * @returns test result
   */
   private checkInstructions(data: string): boolean{
-    let regex = /^[ADG]+$/g
-    let result = regex.test(data);
+    const regex = /^[ADG]+$/g
+    const result = regex.test(data);
     return result;
   }
 

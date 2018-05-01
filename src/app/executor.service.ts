@@ -16,8 +16,8 @@ export class ExecutorService {
   * @returns Mower
   */
   public loadMowers(data: string): string[] {
-       let corner = this.loaderService.getCorner(data);
-       let mowers = this.loaderService.loadMowers(data);
+       const corner = this.loaderService.getCorner(data);
+       const mowers = this.loaderService.loadMowers(data);
        return this.execute(mowers,corner);
   }
 
@@ -28,7 +28,7 @@ export class ExecutorService {
   private execute(mowers: Array<Mower>, corner: Position): string[] {
     let instructions: Array<Instruction>;
     let instruction: Instruction;
-    let results: string[] = [];
+    const results: string[] = [];
     let mower: Mower;
     for (let i = 0; i < mowers.length; i++) {
         mower = mowers[i];
