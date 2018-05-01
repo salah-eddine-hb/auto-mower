@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ValidatorService } from '../validator.service';
 import { ExecutorService } from '../executor.service';
+import { Mower } from '../Mower';
 
 @Component({
   selector: 'app-file-uploader',
@@ -8,7 +9,8 @@ import { ExecutorService } from '../executor.service';
   styleUrls: ['./file-uploader.component.css']
 })
 export class FileUploaderComponent implements OnInit {
-  results: string[];
+  mowers: Mower[];
+  errors: string[];
   constructor(private validatorService: ValidatorService, 
               private executorService: ExecutorService) 
   { }
@@ -18,16 +20,12 @@ export class FileUploaderComponent implements OnInit {
 
   openFile(files: FileList) {
     let reader = new FileReader();
-    reader.onerror = () => {
-      //this.results = ['Plz upload a file'];
-      console.log('error');
-    }
+
     reader.onload = () => {
-        let data = reader.result;
-        let errors = this.validatorService.validate(data);
-        if(errors.length == 0) 
-          this.results = this.executorService.loadMowers(data);
-        else this.results = errors;
+        const data = reader.result;
+        this.errors = this.validatorService.validate(data);
+        if(this.errors.length == 0) 
+          this.mowers = this.executorService.loadMowers(data);
     }
     reader.readAsText(files[0]);
     };

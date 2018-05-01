@@ -3,6 +3,11 @@
   <input id="file" type="file" accept='text/plain' #file>
   <input type="button" (click)="openFile(file.files)" value="Submit">
 </div>
-<div>
-  <p *ngFor="let result of results">{{result}}</p>
+<div *ngIf="errors != null && errors.length === 0">
+  <p *ngFor="let mower of mowers">
+    X = {{mower.Position.X}}, Y = {{mower.Position.Y}}, Orientation = {{mower.Orientation}}
+  </p>
+</div>
+<div *ngIf="errors != null && errors.length != 0">
+  <p *ngFor="let error of errors">{{error}}</p>
 </div>

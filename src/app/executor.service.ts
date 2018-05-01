@@ -15,7 +15,7 @@ export class ExecutorService {
   * @param (Mower, Instruction, Corner)
   * @returns Mower
   */
-  public loadMowers(data: string): string[] {
+  public loadMowers(data: string): Mower[] {
        const corner = this.loaderService.getCorner(data);
        const mowers = this.loaderService.loadMowers(data);
        return this.execute(mowers,corner);
@@ -25,10 +25,10 @@ export class ExecutorService {
   * Execute the instructions and move the mowers
   * @param (Mowers, Corner)
   */
-  private execute(mowers: Array<Mower>, corner: Position): string[] {
+  private execute(mowers: Array<Mower>, corner: Position): Mower[] {
     let instructions: Array<Instruction>;
     let instruction: Instruction;
-    const results: string[] = [];
+    const results: Mower[] = [];
     let mower: Mower;
     for (let i = 0; i < mowers.length; i++) {
         mower = mowers[i];
@@ -37,7 +37,7 @@ export class ExecutorService {
             instruction = instructions[j];
             mower = this.move(mower, instruction, corner);
         }
-      results.push('X : ' + mower.Position.X+' Y : ' + mower.Position.Y+ ' Orientation : ' + mower.Orientation);
+      results.push(new Mower(new Position(mower.Position.X,mower.Position.Y),mower.Orientation));
     }return results;
   }
 
