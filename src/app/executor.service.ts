@@ -1,8 +1,8 @@
 import { Mower } from './Mower';
-import { Position } from './Position';
+import { Position } from './Position.enum';
 import { Injectable } from '@angular/core';
-import { Instruction } from './Instruction';
-import { Orientation } from './Orientation';
+import { Instruction } from './Instruction.enum';
+import { Orientation } from './Orientation.enum';
 import { LoaderService } from './loader.service';
 
 @Injectable()

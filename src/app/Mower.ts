@@ -1,6 +1,6 @@
-import { Position } from './Position';
-import { Orientation } from './Orientation';
-import { Instruction } from './Instruction';
+import { Position } from './Position.enum';
+import { Orientation } from './Orientation.enum';
+import { Instruction } from './Instruction.enum';
 
 export class Mower {
 
