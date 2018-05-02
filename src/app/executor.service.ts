@@ -103,7 +103,7 @@ export class ExecutorService {
   */
   private moveForward(mower: Mower, corner: Position): Mower {
       if (mower.Orientation === Orientation.NORD) {
-          if (this.checkMovingXForward(mower, corner))
+          if (this.checkMovingYForward(mower, corner))
               mower.Position.Y = mower.Position.Y + 1;
       } else if (mower.Orientation === Orientation.SUD) {
           if (this.checkMovingYBackward(mower))
@@ -112,7 +112,7 @@ export class ExecutorService {
           if (this.checkMovingXBackward(mower))
               mower.Position.X = mower.Position.X - 1;
       } else if (mower.Orientation === Orientation.EST) {
-          if (this.checkMovingYForward(mower, corner))
+          if (this.checkMovingXForward(mower, corner))
               mower.Position.X = mower.Position.X + 1;
       } else {
           //error

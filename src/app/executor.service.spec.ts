@@ -6,105 +6,122 @@ import { Position } from './Position.enum';
 import { Orientation } from './Orientation.enum';
 import { Instruction } from './Instruction.enum';
 
-// describe('ExecutorService', () => {
-//   beforeEach(() => {
-//     TestBed.configureTestingModule({
-//       providers: [ExecutorService, LoaderService]
-//     });
-//   });
 
-  // it('should be created', inject([ExecutorService], (service: ExecutorService) => {
-  //   service = new ExecutorService(new LoaderService());
-  //   expect(service).toBeTruthy();
-  // }));
-
-// });
-
-describe('ExecutorService test move forward', () => {
-  // beforeEach(() => {
-  //   TestBed.configureTestingModule({
-  //     providers: [ExecutorService]
-  //   });
-  // });
-
-  it('#should move forward and increment Y by one', () => {
-    const valueServiceSpy = jasmine.createSpyObj('LoaderService', ['loadMowers', 'getCorner']);
+  describe('ExecutorService test move forward', () => {
+    const loaderServiceSpy = jasmine.createSpyObj('LoaderService', ['loadMowers', 'getCorner']);
     const mower = new Mower(new Position(2,2), Orientation.NORD);
     mower.Instructions = [Instruction.FORWARD];
-    const stubValue1 = [mower];
-    const stubValue2 = new Position(5,5);
-    valueServiceSpy.loadMowers.and.returnValue(stubValue1);
-    valueServiceSpy.getCorner.and.returnValue(stubValue2);
+    const cornersValue = new Position(5,5);
+    loaderServiceSpy.getCorner.and.returnValue(cornersValue);
 
-    const service = new ExecutorService(valueServiceSpy);
+  it('#should move forward and increment Y by one', () => {
+    const mowersValue = [mower];
+    loaderServiceSpy.loadMowers.and.returnValue(mowersValue);
+
+    const service = new ExecutorService(loaderServiceSpy);
     const mowers = service.loadMowers('55\n22N\nA');
+
     expect(mowers[0].Position.Y).toEqual(3);
     expect(mowers[0].Position.X).toEqual(2);
   });
 
   it('#should move forward and increment X by one', () => {
-    const valueServiceSpy = jasmine.createSpyObj('LoaderService', ['loadMowers', 'getCorner']);
-    const mower = new Mower(new Position(2,2), Orientation.EST);
-    mower.Instructions = [Instruction.FORWARD];
-    const stubValue1 = [mower];
-    const stubValue2 = new Position(5,5);
-    valueServiceSpy.loadMowers.and.returnValue(stubValue1);
-    valueServiceSpy.getCorner.and.returnValue(stubValue2);
+    mower.Orientation = Orientation.EST;
+    mower.Position.X = 2;
+    mower.Position.Y = 2;
+    const mowersValue = [mower];
+    loaderServiceSpy.loadMowers.and.returnValue(mowersValue);
 
-    const service = new ExecutorService(valueServiceSpy);
+    const service = new ExecutorService(loaderServiceSpy);
     const mowers = service.loadMowers('55\n22E\nA');
+
     expect(mowers[0].Position.Y).toEqual(2);
     expect(mowers[0].Position.X).toEqual(3);
   });
 
-  it('#should move forward and de-increment Y by one', () => {
-    const valueServiceSpy = jasmine.createSpyObj('LoaderService', ['loadMowers', 'getCorner']);
-    const mower = new Mower(new Position(2,2), Orientation.SUD);
-    mower.Instructions = [Instruction.FORWARD];
-    const stubValue1 = [mower];
-    const stubValue2 = new Position(5,5);
-    valueServiceSpy.loadMowers.and.returnValue(stubValue1);
-    valueServiceSpy.getCorner.and.returnValue(stubValue2);
+  it('#should move backward and de-increment Y by one', () => {
+    mower.Orientation = Orientation.SUD;
+    mower.Position.X = 2;
+    mower.Position.Y = 2;
+    const mowersValue = [mower];
+    loaderServiceSpy.loadMowers.and.returnValue(mowersValue);
 
-    const service = new ExecutorService(valueServiceSpy);
+    const service = new ExecutorService(loaderServiceSpy);
     const mowers = service.loadMowers('55\n22S\nA');
+
     expect(mowers[0].Position.Y).toEqual(1);
     expect(mowers[0].Position.X).toEqual(2);
   });
 
-  it('#should move forward and de-increment X by one', () => {
-    const valueServiceSpy = jasmine.createSpyObj('LoaderService', ['loadMowers', 'getCorner']);
-    const mower = new Mower(new Position(2,2), Orientation.WEST);
-    mower.Instructions = [Instruction.FORWARD];
-    const stubValue1 = [mower];
-    const stubValue2 = new Position(5,5);
-    valueServiceSpy.loadMowers.and.returnValue(stubValue1);
-    valueServiceSpy.getCorner.and.returnValue(stubValue2);
+  it('#should move backward and de-increment X by one', () => {
+    mower.Orientation = Orientation.WEST;
+    mower.Position.X = 2;
+    mower.Position.Y = 2;
+    const mowersValue = [mower];
+    loaderServiceSpy.loadMowers.and.returnValue(mowersValue);
 
-    const service = new ExecutorService(valueServiceSpy);
+    const service = new ExecutorService(loaderServiceSpy);
     const mowers = service.loadMowers('55\n22W\nA');
+
     expect(mowers[0].Position.Y).toEqual(2);
     expect(mowers[0].Position.X).toEqual(1);
   });
 
-  // it('shouldn\'t move forward if the mower exceeds the upper side', inject([ExecutorService], (service: ExecutorService) => {
-  //   service = new ExecutorService(new LoaderService());
-  //   expect(service).toBeTruthy();
-  // }));
+  it('#shouldn\'t move forward if you passe the right side of the square', () => {
+    mower.Orientation = Orientation.EST;
+    mower.Position.X = 5;
+    mower.Position.Y = 2;
+    const mowersValue = [mower];
+    loaderServiceSpy.loadMowers.and.returnValue(mowersValue);
 
-  // it('shouldn\'t move forward if the mower exceeds the bottom side', inject([ExecutorService], (service: ExecutorService) => {
-  //   service = new ExecutorService(new LoaderService());
-  //   expect(service).toBeTruthy();
-  // }));
+    const service = new ExecutorService(loaderServiceSpy);
+    const mowers = service.loadMowers('55\n25E\nA');
 
-  // it('shouldn\'t move forward if the mower exceeds the left side', inject([ExecutorService], (service: ExecutorService) => {
-  //   service = new ExecutorService(new LoaderService());
-  //   expect(service).toBeTruthy();
-  // }));
+    expect(mowers[0].Position.Y).toEqual(2);
+    expect(mowers[0].Position.X).toEqual(5);
+  });
 
-  // it('shouldn\'t move forward if the mower exceeds the right side', inject([ExecutorService], (service: ExecutorService) => {
-  //   service = new ExecutorService(new LoaderService());
-  //   expect(service).toBeTruthy();
-  // }));
+  it('#shouldn\'t move forward if you passe the left side of the square', () => {
+    mower.Orientation = Orientation.WEST;
+    mower.Position.X = 0;
+    mower.Position.Y = 2;
+    const mowersValue = [mower];
+    loaderServiceSpy.loadMowers.and.returnValue(mowersValue);
+
+    const service = new ExecutorService(loaderServiceSpy);
+    const mowers = service.loadMowers('55\n25W\nA');
+
+    expect(mowers[0].Position.Y).toEqual(2);
+    expect(mowers[0].Position.X).toEqual(0);
+  });
+
+  it('#shouldn\'t move forward if you passe the upper side of the square', () => {
+    mower.Orientation = Orientation.NORD;
+    mower.Position.X = 2;
+    mower.Position.Y = 5;
+    const mowersValue = [mower];
+    loaderServiceSpy.loadMowers.and.returnValue(mowersValue);
+
+    const service = new ExecutorService(loaderServiceSpy);
+    const mowers = service.loadMowers('55\n25N\nA');
+
+    expect(mowers[0].Position.Y).toEqual(5);
+    expect(mowers[0].Position.X).toEqual(2);
+  });
+
+  it('#shouldn\'t move forward if you passe the bottom side of the square', () => {
+    mower.Orientation = Orientation.SUD;
+    mower.Position.X = 2;
+    mower.Position.Y = 0;
+    const mowersValue = [mower];
+    loaderServiceSpy.loadMowers.and.returnValue(mowersValue);
+
+    const service = new ExecutorService(loaderServiceSpy);
+    const mowers = service.loadMowers('55\n25S\nA');
+
+    expect(mowers[0].Position.Y).toEqual(0);
+    expect(mowers[0].Position.X).toEqual(2);
+  });
+  
 });
 
