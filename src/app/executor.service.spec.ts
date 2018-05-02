@@ -24,6 +24,10 @@ import { Mower } from './Mower';
       mower.Position.Y = 2;
     });  
 
+    it('should be created', inject([ExecutorService], (service: ExecutorService) => {
+      expect(service).toBeTruthy();
+    }));
+
     it('#should move forward and increment Y by one', inject([ExecutorService], (service: ExecutorService) => {
       const mowersValue = [mower];
       loaderServiceSpy.loadMowers.and.returnValue(mowersValue);
