@@ -1,4 +1,4 @@
-import { Mower } from './Mower';
+import { Mower } from './Mower.model';
 import { Position } from './Position.enum';
 import { Injectable } from '@angular/core';
 import { Orientation } from './Orientation.enum';
@@ -99,15 +99,15 @@ private getCommands(data: string): Array<Instruction> {
 }
 
 
-  /**
-    * Load mowers from the file
-    * and run the Executor to execute instructions
-    */
-   public getCorner(data: string): Position {
-    const lines = data.toString().split('\n');
-    for (let line of lines) {
-        return this.getCorners(line);
-    }
-   }
+/**
+* Load mowers from the file
+* and run the Executor to execute instructions
+*/
+public getCorner(data: string): Position {
+  const lines = data.toString().split('\n');
+  for (let line of lines) {
+      return this.getCorners(line);
+  }
+}
 
 }
