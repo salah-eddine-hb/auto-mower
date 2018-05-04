@@ -2,13 +2,13 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { Error } from '../error.enum';
-import { ExecutorService } from '../executor.service';
+import { Error } from '../utils/error.enum';
+import { ExecutorService } from '../services/executor.service';
 import { FileUploaderComponent } from './file-uploader.component';
-import { Mower } from '../mower.model';
-import { Orientation } from '../orientation.enum';
-import { Position } from '../position.model';
-import { ValidatorService } from '../validator.service';
+import { Mower } from '../models/mower.model';
+import { Orientation } from '../utils/orientation.enum';
+import { Position } from '../models/position.model';
+import { ValidatorService } from '../services/validator.service';
 
 describe('FileUploaderComponent', () => {
 

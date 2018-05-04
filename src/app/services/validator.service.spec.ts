@@ -1,6 +1,6 @@
 import { TestBed, inject } from '@angular/core/testing';
 
-import { Error } from './error.enum';
+import { Error } from '../utils/error.enum';
 import { ValidatorService } from './validator.service';
 
 describe('ValidatorService test right upper corner', () => {

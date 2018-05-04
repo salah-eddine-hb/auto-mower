@@ -4,9 +4,9 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { FileUploaderComponent } from './file-uploader/file-uploader.component';
-import { ValidatorService } from './validator.service';
-import { ExecutorService } from './executor.service';
-import { LoaderService } from './loader.service';
+import { ValidatorService } from './services/validator.service';
+import { ExecutorService } from './services/executor.service';
+import { LoaderService } from './services/loader.service';
 
 
 @NgModule({

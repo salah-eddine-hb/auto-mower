@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { Error } from './error.enum';
+import { Error } from '../utils/error.enum';
 
 @Injectable()
 export class ValidatorService {

@@ -1,11 +1,11 @@
 import { TestBed, inject } from '@angular/core/testing';
 
 import { ExecutorService } from './executor.service';
-import { Instruction } from './instruction.enum';
+import { Instruction } from '../utils/instruction.enum';
 import { LoaderService } from './loader.service';
-import { Mower } from './mower.model';
-import { Orientation } from './orientation.enum';
-import { Position } from './position.model';
+import { Mower } from '../models/mower.model';
+import { Orientation } from '../utils/orientation.enum';
+import { Position } from '../models/position.model';
 
 describe('ExecutorService test move forward', () => {
   const loaderServiceSpy = jasmine.createSpyObj('LoaderService', ['loadMowers', 'getCorner']);
