@@ -23,36 +23,36 @@ export class FileUploaderComponent implements OnInit {
   openFile(file: File) {
     return new Promise((resolve, reject) => {
       const fileReader = new FileReader();
-      if(file){
+      if (file) {
         fileReader.onload = () => {
-            const data = fileReader.result;
-            this.errors = this.validate(data);
-            if(this.hasErrors(this.errors)) 
-              resolve(this.errors);
-            else  
-              this.mowers = this.loadMowers(data);
+          const data = fileReader.result;
+          this.errors = this.validate(data);
+          if (this.hasErrors(this.errors))
+            resolve(this.errors);
+          else
+            this.mowers = this.loadMowers(data);
         }
         fileReader.readAsText(file);
-      }else{
+      } else {
         this.errors = [Error.ERROR_FILE];
         resolve(this.errors);
       }
     })
   }
 
-  private validate(data: string): string[]{
+  private validate(data: string): string[] {
     return this.validatorService.validate(data)
   }
 
-  private loadMowers(data: string): Mower[]{
+  private loadMowers(data: string): Mower[] {
     return this.executorService.loadMowers(data)
   }
 
-  private hasErrors(errors): boolean{
+  private hasErrors(errors): boolean {
     return this.errors.length > 0 ? true : false
   }
 
-  public get Errors(){
+  public get Errors() {
     return this.errors;
   }
 

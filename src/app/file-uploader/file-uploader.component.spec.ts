@@ -16,17 +16,17 @@ describe('FileUploaderComponent', () => {
   let fixture: ComponentFixture<FileUploaderComponent>;
 
   const validatorServiceSpy = jasmine.createSpyObj('ValidatorService', ['validate']);
-  const executorServiceSpy  = jasmine.createSpyObj('ExecutorService', ['loadMowers']);
+  const executorServiceSpy = jasmine.createSpyObj('ExecutorService', ['loadMowers']);
 
   beforeEach(() => {
 
     validatorServiceSpy.validate.and.returnValue(['error at line 1']);
     executorServiceSpy.loadMowers.and.returnValue([
-      new Mower(new Position(2,2), Orientation.NORD),
-      new Mower(new Position(3,3), Orientation.SUD)]);
+      new Mower(new Position(2, 2), Orientation.NORD),
+      new Mower(new Position(3, 3), Orientation.SUD)]);
 
     TestBed.configureTestingModule({
-      declarations: [ FileUploaderComponent ],
+      declarations: [FileUploaderComponent],
       providers: [
         FileUploaderComponent,
         { provide: ValidatorService, useValue: validatorServiceSpy },
@@ -68,9 +68,9 @@ describe('FileUploaderComponent', () => {
 
   it('#should component errors array contain one element "error at line 1"', async(() => {
     const bannerElement: HTMLElement = fixture.nativeElement;
-    let file = new File(['556'],'input.txt');
+    let file = new File(['556'], 'input.txt');
 
-    component.openFile(file).then((errors) =>{
+    component.openFile(file).then((errors) => {
       expect(errors).toEqual(['error at line 1']);
     })
   }));
@@ -78,9 +78,9 @@ describe('FileUploaderComponent', () => {
   it('#should print an error at line 1 in the file', async(() => {
     const bannerElement: HTMLElement = fixture.nativeElement;
     const input = bannerElement.querySelector('input');
-    let file = new File(['556'],'input.txt');
+    let file = new File(['556'], 'input.txt');
 
-    component.openFile(file).then((errors) =>{
+    component.openFile(file).then((errors) => {
       fixture.detectChanges();
       const errs = bannerElement.querySelector('#errors');
       expect(errs.textContent).toMatch(/error at line 1/i);
@@ -89,10 +89,10 @@ describe('FileUploaderComponent', () => {
 
   it('#should print all processed mowers as result', () => {
     const bannerElement: HTMLElement = fixture.nativeElement;
-    let file = new File(['55\n12N\nGAGAGAGAA\n44S\nGADG'],'input.txt');
+    let file = new File(['55\n12N\nGAGAGAGAA\n44S\nGADG'], 'input.txt');
     //validatorServiceSpy.validate.and.returnValue([]);
 
-    component.openFile(file).then((errors) =>{
+    component.openFile(file).then((errors) => {
       fixture.detectChanges();
       const errs = bannerElement.querySelector('#errors');
       expect(errs.textContent).toMatch(/error at line 1/i);
