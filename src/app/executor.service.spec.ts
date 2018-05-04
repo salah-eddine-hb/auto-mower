@@ -1,8 +1,11 @@
 import { TestBed, inject } from '@angular/core/testing';
+
 import { ExecutorService } from './executor.service';
+import { LoaderService } from './loader.service';
+
 import { Orientation } from './orientation.enum';
 import { Instruction } from './instruction.enum';
-import { LoaderService } from './loader.service';
+
 import { Position } from './position.model';
 import { Mower } from './mower.model';
 

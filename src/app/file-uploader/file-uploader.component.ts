@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+
 import { ValidatorService } from '../validator.service';
 import { ExecutorService } from '../executor.service';
+
 import { Mower } from '../mower.model';
 import { Error } from '../error.enum';
 
@@ -10,8 +12,8 @@ import { Error } from '../error.enum';
   styleUrls: ['./file-uploader.component.css']
 })
 export class FileUploaderComponent implements OnInit {
-  mowers: Mower[];
-  errors: string[];
+  private mowers: Mower[];
+  private errors: string[];
 
   constructor(private validatorService: ValidatorService, private executorService: ExecutorService) {
   }
@@ -21,17 +23,17 @@ export class FileUploaderComponent implements OnInit {
 
   openFile(file: File) {
     return new Promise((resolve, reject) => {
-      const reader = new FileReader();
+      const fileReader = new FileReader();
       if(file){
-        reader.onload = () => {
-            const data = reader.result;
+        fileReader.onload = () => {
+            const data = fileReader.result;
             this.errors = this.validate(data);
             if(this.hasErrors(this.errors)) 
               resolve(this.errors);
             else  
               this.mowers = this.loadMowers(data);
         }
-        reader.readAsText(file);
+        fileReader.readAsText(file);
       }else{
         this.errors = [Error.ERROR_FILE];
         resolve(this.errors);
@@ -39,19 +41,19 @@ export class FileUploaderComponent implements OnInit {
     })
   }
 
-  validate(data: string): string[]{
+  private validate(data: string): string[]{
     return this.validatorService.validate(data)
   }
 
-  loadMowers(data: string): Mower[]{
+  private loadMowers(data: string): Mower[]{
     return this.executorService.loadMowers(data)
   }
 
-  hasErrors(errors): boolean{
+  private hasErrors(errors): boolean{
     return this.errors.length > 0 ? true : false
   }
 
-  get Errors(){
+  public get Errors(){
     return this.errors;
   }
 

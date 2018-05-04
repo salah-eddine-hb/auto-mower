@@ -1,12 +1,14 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
+import { DebugElement } from '@angular/core';
+
 import { FileUploaderComponent } from './file-uploader.component';
 import { ValidatorService } from '../validator.service';
 import { ExecutorService } from '../executor.service';
-import { Orientation } from '../orientation.enum';
+
 import { Position } from '../position.model';
 import { Mower } from '../mower.model';
-import { By } from '@angular/platform-browser';
-import { DebugElement } from '@angular/core';
+import { Orientation } from '../orientation.enum';
 import { Error } from '../error.enum';
 
 describe('FileUploaderComponent', () => {
@@ -49,9 +51,9 @@ describe('FileUploaderComponent', () => {
     const button = bannerElement.querySelector('button');
     button.click();
 
-    expect(component.errors).toBeDefined();
-    expect(component.errors.length).toEqual(1);
-    expect(component.errors.pop()).toMatch(Error.ERROR_FILE);
+    expect(component.Errors).toBeDefined();
+    expect(component.Errors.length).toEqual(1);
+    expect(component.Errors.pop()).toMatch(Error.ERROR_FILE);
   });
 
   it('#should fire up the the click button event', async(() => {
