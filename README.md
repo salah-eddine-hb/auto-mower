@@ -6,10 +6,10 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Run the project
 
-  1 - Run `ng serve --open` `ng serve` and navigate to `http://localhost:4200/`
-  2 - Uplaod an input file with initial position and orientation of mowers
-  3 - Click submit to start processing the file
-  4 - See the result (new position and orientation of the mowers)
+  - Run `ng serve --open` `ng serve` and navigate to `http://localhost:4200/`
+  - Uplaod an input file with initial position and orientation of mowers
+  - Click submit to start processing the file
+  - See the result (new position and orientation of the mowers)
   
 ## Development server
 
