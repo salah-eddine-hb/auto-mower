@@ -2,12 +2,12 @@ import { TestBed, inject } from '@angular/core/testing';
 import { ExecutorService } from './executor.service';
 import { Orientation } from './orientation.enum';
 import { Instruction } from './instruction.enum';
-import { Loader } from './loader.service';
+import { LoaderService } from './loader.service';
 import { Position } from './position.model';
 import { Mower } from './mower.model';
 
   describe('ExecutorService test move forward', () => {
-    const loaderServiceSpy = jasmine.createSpyObj('Loader', ['loadMowers', 'getCorner']);
+    const loaderServiceSpy = jasmine.createSpyObj('LoaderService', ['loadMowers', 'getCorner']);
     const mower = new Mower(new Position(2,2), Orientation.NORD);
     mower.Instructions = [Instruction.FORWARD];
     const cornersValue = new Position(5,5);
@@ -17,7 +17,7 @@ import { Mower } from './mower.model';
       TestBed.configureTestingModule({
         providers: [
           ExecutorService,
-          { provide: Loader, useValue: loaderServiceSpy }
+          { provide: LoaderService, useValue: loaderServiceSpy }
         ]
       });
       mower.Position.X = 2;

@@ -5,7 +5,7 @@ import { Orientation } from './orientation.enum';
 import { Instruction } from './instruction.enum';
 
 @Injectable()
-export class Loader {
+export class LoaderService {
 
   constructor() { }
 

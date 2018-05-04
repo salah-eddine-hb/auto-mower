@@ -1,11 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
+
 import { AppComponent } from './app.component';
 import { FileUploaderComponent } from './file-uploader/file-uploader.component';
 import { ValidatorService } from './validator.service';
 import { ExecutorService } from './executor.service';
-import { Loader } from './loader.service';
+import { LoaderService } from './loader.service';
 
 
 @NgModule({
@@ -19,7 +20,7 @@ import { Loader } from './loader.service';
   providers: [
     ValidatorService,
     ExecutorService,
-    Loader
+    LoaderService
   ],
   bootstrap: [AppComponent]
 })
