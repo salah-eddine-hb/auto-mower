@@ -1,4 +1,4 @@
-import { Mower } from './Mower';
+import { Mower } from './Mower.model';
 import { Position } from './Position.enum';
 import { Injectable } from '@angular/core';
 import { Instruction } from './Instruction.enum';

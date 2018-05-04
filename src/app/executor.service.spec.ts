@@ -4,7 +4,7 @@ import { Orientation } from './Orientation.enum';
 import { Instruction } from './Instruction.enum';
 import { LoaderService } from './loader.service';
 import { Position } from './Position.enum';
-import { Mower } from './Mower';
+import { Mower } from './Mower.model';
 
   describe('ExecutorService test move forward', () => {
     const loaderServiceSpy = jasmine.createSpyObj('LoaderService', ['loadMowers', 'getCorner']);
