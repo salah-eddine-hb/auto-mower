@@ -1,8 +1,8 @@
-import { Mower } from './Mower.model';
-import { Position } from './Position.enum';
+import { Mower } from './mower.model';
+import { Position } from './position.model';
 import { Injectable } from '@angular/core';
-import { Orientation } from './Orientation.enum';
-import { Instruction } from './Instruction.enum';
+import { OrientationEnum } from './orientation.enum';
+import { InstructionEnum } from './instruction.enum';
 
 @Injectable()
 export class LoaderService {
@@ -50,21 +50,21 @@ private getCorners(data: string): Position {
 private getMower(data: string): Mower {
     let mower: Mower;
     let position: Position;
-    let orientation: Orientation;
+    let orientation: OrientationEnum;
 
     position = new Position(parseInt(data.charAt(0)), parseInt(data.charAt(1)));
     switch (data.charAt(2)) {
         case 'N':
-            orientation = Orientation.NORD;
+            orientation = OrientationEnum.NORD;
             break;
         case 'S':
-            orientation = Orientation.SUD;
+            orientation = OrientationEnum.SUD;
             break;
         case 'E':
-            orientation = Orientation.EST;
+            orientation = OrientationEnum.EST;
             break;
         case 'W':
-            orientation = Orientation.WEST;
+            orientation = OrientationEnum.WEST;
             break;
         default:
             throw new Error("Error reading data from file");
@@ -78,19 +78,19 @@ private getMower(data: string): Mower {
 * @param data - String that contain all instructions without space (GADDAAGD)
 * @returns New Instruction object
 */
-private getCommands(data: string): Array<Instruction> {
-    let instructions: Array<Instruction> = [];
+private getCommands(data: string): Array<InstructionEnum> {
+    let instructions: Array<InstructionEnum> = [];
     for (let index = 0; index < data.length; index++) {
         const instruction = data[index];
         switch (instruction) {
             case 'G':
-                instructions.push(Instruction.LEFT);
+                instructions.push(InstructionEnum.LEFT);
                 break;
             case 'D':
-                instructions.push(Instruction.RIGHT);
+                instructions.push(InstructionEnum.RIGHT);
                 break;
             case 'A':
-                instructions.push(Instruction.FORWARD);
+                instructions.push(InstructionEnum.FORWARD);
                 break;
             default:
                 throw new Error("Error reading data from file");

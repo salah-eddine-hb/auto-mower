@@ -1,15 +1,15 @@
 import { TestBed, inject } from '@angular/core/testing';
 import { ExecutorService } from './executor.service';
-import { Orientation } from './Orientation.enum';
-import { Instruction } from './Instruction.enum';
+import { OrientationEnum } from './orientation.enum';
+import { InstructionEnum } from './instruction.enum';
 import { LoaderService } from './loader.service';
-import { Position } from './Position.enum';
-import { Mower } from './Mower.model';
+import { Position } from './position.model';
+import { Mower } from './mower.model';
 
   describe('ExecutorService test move forward', () => {
     const loaderServiceSpy = jasmine.createSpyObj('LoaderService', ['loadMowers', 'getCorner']);
-    const mower = new Mower(new Position(2,2), Orientation.NORD);
-    mower.Instructions = [Instruction.FORWARD];
+    const mower = new Mower(new Position(2,2), OrientationEnum.NORD);
+    mower.Instructions = [InstructionEnum.FORWARD];
     const cornersValue = new Position(5,5);
     loaderServiceSpy.getCorner.and.returnValue(cornersValue);
 
@@ -38,7 +38,7 @@ import { Mower } from './Mower.model';
     }));
 
     it('#should move forward and increment X by one',  inject([ExecutorService], (service: ExecutorService) => {
-      mower.Orientation = Orientation.EST;
+      mower.Orientation = OrientationEnum.EST;
       const mowersValue = [mower];
       loaderServiceSpy.loadMowers.and.returnValue(mowersValue);
 
@@ -49,7 +49,7 @@ import { Mower } from './Mower.model';
     }));
 
     it('#should move backward and de-increment Y by one',  inject([ExecutorService], (service: ExecutorService) => {
-      mower.Orientation = Orientation.SUD;
+      mower.Orientation = OrientationEnum.SUD;
       const mowersValue = [mower];
       loaderServiceSpy.loadMowers.and.returnValue(mowersValue);
 
@@ -60,7 +60,7 @@ import { Mower } from './Mower.model';
     }));
 
     it('#should move backward and de-increment X by one',  inject([ExecutorService], (service: ExecutorService) => {
-      mower.Orientation = Orientation.WEST;
+      mower.Orientation = OrientationEnum.WEST;
       const mowersValue = [mower];
       loaderServiceSpy.loadMowers.and.returnValue(mowersValue);
 
@@ -71,7 +71,7 @@ import { Mower } from './Mower.model';
     }));
 
     it('#shouldn\'t move forward if you passe the right side of the square',  inject([ExecutorService], (service: ExecutorService) => {
-      mower.Orientation = Orientation.EST;
+      mower.Orientation = OrientationEnum.EST;
       mower.Position.X = 5;
       mower.Position.Y = 2;
       const mowersValue = [mower];
@@ -84,7 +84,7 @@ import { Mower } from './Mower.model';
     }));
 
     it('#shouldn\'t move forward if you passe the left side of the square',  inject([ExecutorService], (service: ExecutorService) => {
-      mower.Orientation = Orientation.WEST;
+      mower.Orientation = OrientationEnum.WEST;
       mower.Position.X = 0;
       mower.Position.Y = 2;
       const mowersValue = [mower];
@@ -97,7 +97,7 @@ import { Mower } from './Mower.model';
     }));
 
     it('#shouldn\'t move forward if you passe the upper side of the square',  inject([ExecutorService], (service: ExecutorService) => {
-      mower.Orientation = Orientation.NORD;
+      mower.Orientation = OrientationEnum.NORD;
       mower.Position.X = 2;
       mower.Position.Y = 5;
       const mowersValue = [mower];
@@ -110,7 +110,7 @@ import { Mower } from './Mower.model';
     }));
 
     it('#shouldn\'t move forward if you passe the bottom side of the square',  inject([ExecutorService], (service: ExecutorService) => {
-      mower.Orientation = Orientation.SUD;
+      mower.Orientation = OrientationEnum.SUD;
       mower.Position.X = 2;
       mower.Position.Y = 0;
       const mowersValue = [mower];

@@ -1,9 +1,9 @@
-import { Mower } from './Mower.model';
-import { Position } from './Position.enum';
+import { Mower } from './mower.model';
 import { Injectable } from '@angular/core';
-import { Instruction } from './Instruction.enum';
-import { Orientation } from './Orientation.enum';
+import { InstructionEnum } from './instruction.enum';
+import { OrientationEnum } from './orientation.enum';
 import { LoaderService } from './loader.service';
+import { Position } from './position.model';
 
 @Injectable()
 export class ExecutorService {
@@ -26,8 +26,8 @@ export class ExecutorService {
   * @param (Mowers, Corner)
   */
   private execute(mowers: Array<Mower>, corner: Position): Mower[] {
-    let instructions: Array<Instruction>;
-    let instruction: Instruction;
+    let instructions: Array<InstructionEnum>;
+    let instruction: InstructionEnum;
     const results: Mower[] = [];
     let mower: Mower;
     for (let i = 0; i < mowers.length; i++) {
@@ -46,12 +46,12 @@ export class ExecutorService {
   * @param (Mower, Instruction, Corner)
   * @returns Mower
   */
-  private move(mower: Mower, instruction: Instruction, corner: Position): Mower {
-      if (instruction === Instruction.RIGHT) {
+  private move(mower: Mower, instruction: InstructionEnum, corner: Position): Mower {
+      if (instruction === InstructionEnum.RIGHT) {
           this.moveRight(mower);
-      } else if (instruction === Instruction.LEFT) {
+      } else if (instruction === InstructionEnum.LEFT) {
           this.moveLeft(mower);
-      } else if (instruction === Instruction.FORWARD) {
+      } else if (instruction === InstructionEnum.FORWARD) {
           this.moveForward(mower, corner);
       } else {
           //error
@@ -64,14 +64,14 @@ export class ExecutorService {
   * @returns Mower
   */
   private moveLeft(mower: Mower): Mower {
-      if (mower.Orientation === Orientation.NORD) {
-          mower.Orientation = Orientation.WEST;
-      } else if (mower.Orientation === Orientation.SUD) {
-          mower.Orientation = Orientation.EST;
-      } else if (mower.Orientation === Orientation.WEST) {
-          mower.Orientation = Orientation.SUD;
-      } else if (mower.Orientation === Orientation.EST) {
-          mower.Orientation = Orientation.NORD;
+      if (mower.Orientation === OrientationEnum.NORD) {
+          mower.Orientation = OrientationEnum.WEST;
+      } else if (mower.Orientation === OrientationEnum.SUD) {
+          mower.Orientation = OrientationEnum.EST;
+      } else if (mower.Orientation === OrientationEnum.WEST) {
+          mower.Orientation = OrientationEnum.SUD;
+      } else if (mower.Orientation === OrientationEnum.EST) {
+          mower.Orientation = OrientationEnum.NORD;
       } else {
           //error
       } return mower;
@@ -83,14 +83,14 @@ export class ExecutorService {
   * @returns Mower
   */
   private moveRight(mower: Mower): Mower {
-      if (mower.Orientation === Orientation.NORD) {
-          mower.Orientation = Orientation.EST;
-      } else if (mower.Orientation === Orientation.SUD) {
-          mower.Orientation = Orientation.WEST;
-      } else if (mower.Orientation === Orientation.WEST) {
-          mower.Orientation = Orientation.NORD;
-      } else if (mower.Orientation === Orientation.EST) {
-          mower.Orientation = Orientation.SUD;
+      if (mower.Orientation === OrientationEnum.NORD) {
+          mower.Orientation = OrientationEnum.EST;
+      } else if (mower.Orientation === OrientationEnum.SUD) {
+          mower.Orientation = OrientationEnum.WEST;
+      } else if (mower.Orientation === OrientationEnum.WEST) {
+          mower.Orientation = OrientationEnum.NORD;
+      } else if (mower.Orientation === OrientationEnum.EST) {
+          mower.Orientation = OrientationEnum.SUD;
       } else {
           //error
       } return mower;
@@ -102,16 +102,16 @@ export class ExecutorService {
   * @returns Mower
   */
   private moveForward(mower: Mower, corner: Position): Mower {
-      if (mower.Orientation === Orientation.NORD) {
+      if (mower.Orientation === OrientationEnum.NORD) {
           if (this.checkMovingYForward(mower, corner))
               mower.Position.Y = mower.Position.Y + 1;
-      } else if (mower.Orientation === Orientation.SUD) {
+      } else if (mower.Orientation === OrientationEnum.SUD) {
           if (this.checkMovingYBackward(mower))
               mower.Position.Y = mower.Position.Y - 1;
-      } else if (mower.Orientation === Orientation.WEST) {
+      } else if (mower.Orientation === OrientationEnum.WEST) {
           if (this.checkMovingXBackward(mower))
               mower.Position.X = mower.Position.X - 1;
-      } else if (mower.Orientation === Orientation.EST) {
+      } else if (mower.Orientation === OrientationEnum.EST) {
           if (this.checkMovingXForward(mower, corner))
               mower.Position.X = mower.Position.X + 1;
       } else {

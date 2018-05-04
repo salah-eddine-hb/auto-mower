@@ -1,14 +1,14 @@
-import { Position } from './Position.enum';
-import { Orientation } from './Orientation.enum';
-import { Instruction } from './Instruction.enum';
+import { Position } from './position.model';
+import { OrientationEnum } from './orientation.enum';
+import { InstructionEnum } from './instruction.enum';
 
 export class Mower {
 
-    private instructions: Instruction[];
+    private instructions: InstructionEnum[];
 
-    constructor(private position: Position, private orientation: Orientation) { }
+    constructor(private position: Position, private orientation: OrientationEnum) { }
 
-    public get Instructions(): Array<Instruction> {
+    public get Instructions(): Array<InstructionEnum> {
         return this.instructions;
     }
     public get Position() {
@@ -20,10 +20,10 @@ export class Mower {
     public set Position(value: Position) {
         this.position = value;
     }
-    public set Orientation(value: Orientation) {
+    public set Orientation(value: OrientationEnum) {
         this.orientation = value;
     }
-    public set Instructions(value: Instruction[]) {
+    public set Instructions(value: InstructionEnum[]) {
         this.instructions = value;
     }
 }
