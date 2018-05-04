@@ -7,6 +7,7 @@ import { Position } from '../position.model';
 import { Mower } from '../mower.model';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
+import { Error } from '../error.enum';
 
 describe('FileUploaderComponent', () => {
 
@@ -50,7 +51,7 @@ describe('FileUploaderComponent', () => {
 
     expect(component.errors).toBeDefined();
     expect(component.errors.length).toEqual(1);
-    expect(component.errors.pop()).toMatch(/Plz upload one valid file/i);
+    expect(component.errors.pop()).toMatch(Error.ERROR_FILE);
   });
 
   it('#should fire up the the click button event', async(() => {

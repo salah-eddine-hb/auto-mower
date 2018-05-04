@@ -1,5 +1,6 @@
 import { TestBed, inject } from '@angular/core/testing';
 import { ValidatorService } from './validator.service';
+import { Error } from './error.enum';
 
 describe('ValidatorService test right upper corner', () => {
 
@@ -20,12 +21,12 @@ describe('ValidatorService test right upper corner', () => {
 
   it('#554 should return an error at line 1', inject([ValidatorService], (service: ValidatorService) => {
     let testString = '554';
-    expect(service.validate('554').pop()).toEqual('error at line 1');
+    expect(service.validate('554').pop()).toEqual('1 '+Error.ERROR_CORNER);
   }));
 
   it('#AB in the first line should be return an error at line 1', inject([ValidatorService], (service: ValidatorService) => {
     let testString = 'AB';
-    expect(service.validate(testString).pop()).toEqual('error at line 1');
+    expect(service.validate(testString).pop()).toEqual('1 '+Error.ERROR_CORNER);
   }));
 
 });
@@ -44,12 +45,12 @@ describe('ValidatorService test starting position and orientation', () => {
 
   it('#55\n should return an error at line 2', inject([ValidatorService], (service: ValidatorService) => {
     let testString = '55\n';
-    expect(service.validate(testString).pop()).toEqual('error at line 2');
+    expect(service.validate(testString).pop()).toEqual('2 '+Error.ERROR_POSITION_ORIENTATION);
   }));
 
   it('#55\n01A should return an error at line 2', inject([ValidatorService], (service: ValidatorService) => {
     let testString = '55\n01A';
-    expect(service.validate(testString).pop()).toEqual('error at line 2');
+    expect(service.validate(testString).pop()).toEqual('2 '+Error.ERROR_POSITION_ORIENTATION);
   }));
 
   it('#55\n01N shouldn\'t return an error at line 2', inject([ValidatorService], (service: ValidatorService) => {
@@ -74,12 +75,12 @@ describe('ValidatorService test instructions', () => {
 
   it('#55\n01N\nADGGR should return an error at line 3', inject([ValidatorService], (service: ValidatorService) => {
     let testString = '55\n01N\nADGGR';
-    expect(service.validate(testString).pop()).toEqual('error at line 3');
+    expect(service.validate(testString).pop()).toEqual('3 '+Error.ERROR_INSTRUCTION);
   }));
 
   it('#55\n01N\nshould return an error at line 3', inject([ValidatorService], (service: ValidatorService) => {
     let testString = '55\n01N\n';
-    expect(service.validate(testString).pop()).toEqual('error at line 3');
+    expect(service.validate(testString).pop()).toEqual('3 '+Error.ERROR_INSTRUCTION);
   }));
 
 });
@@ -95,24 +96,24 @@ describe('ValidatorService test all in one', () => {
   it('#55\n01B\nADGGR should return an error at lines 2 and 3', inject([ValidatorService], (service: ValidatorService) => {
     let testString = '55\n01B\nADGGR';
     let result = service.validate(testString);
-    expect(result.pop()).toEqual('error at line 3');
-    expect(result.pop()).toEqual('error at line 2');
+    expect(result.pop()).toEqual('3 '+Error.ERROR_INSTRUCTION);
+    expect(result.pop()).toEqual('2 '+Error.ERROR_POSITION_ORIENTATION);
   }));
 
   it('#55\n01B\nADGGR\n should return an error at lines 2, 3 and 4', inject([ValidatorService], (service: ValidatorService) => {
     let testString = '55\n01B\nADGGR\n';
     let result = service.validate(testString);
-    expect(result.pop()).toEqual('error at line 4');
-    expect(result.pop()).toEqual('error at line 3');
-    expect(result.pop()).toEqual('error at line 2');
+    expect(result.pop()).toEqual('4 '+Error.ERROR_POSITION_ORIENTATION);
+    expect(result.pop()).toEqual('3 '+Error.ERROR_INSTRUCTION);
+    expect(result.pop()).toEqual('2 '+Error.ERROR_POSITION_ORIENTATION);
   }));
 
   it('#55\n01B\nADGGR\n should return an error at lines 2, 3 and 4', inject([ValidatorService], (service: ValidatorService) => {
     let testString = '55\n01B\nADGGR\n';
     let result = service.validate(testString);
-    expect(result.pop()).toEqual('error at line 4');
-    expect(result.pop()).toEqual('error at line 3');
-    expect(result.pop()).toEqual('error at line 2');
+    expect(result.pop()).toEqual('4 '+Error.ERROR_POSITION_ORIENTATION);
+    expect(result.pop()).toEqual('3 '+Error.ERROR_INSTRUCTION);
+    expect(result.pop()).toEqual('2 '+Error.ERROR_POSITION_ORIENTATION);
   }));
 
 });

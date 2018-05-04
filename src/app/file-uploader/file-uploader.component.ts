@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ValidatorService } from '../validator.service';
 import { ExecutorService } from '../executor.service';
 import { Mower } from '../mower.model';
+import { Error } from '../error.enum';
 
 @Component({
   selector: 'app-file-uploader',
@@ -13,7 +14,6 @@ export class FileUploaderComponent implements OnInit {
   errors: string[];
 
   constructor(private validatorService: ValidatorService, private executorService: ExecutorService) {
-
   }
 
   ngOnInit() {
@@ -33,7 +33,7 @@ export class FileUploaderComponent implements OnInit {
         }
         reader.readAsText(file);
       }else{
-        this.errors = ['Plz upload one valid file'];
+        this.errors = [Error.ERROR_FILE];
         resolve(this.errors);
       }
     })

@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Error } from './error.enum';
 
 @Injectable()
 export class ValidatorService {
@@ -17,16 +18,16 @@ export class ValidatorService {
     for (let line of lines) {
       if (index == 1) {
         if(!this.checkUpperRightCorner(line)) 
-          errors.push('error at line '+ index)
+          errors.push(index +' '+ Error.ERROR_CORNER)
       }
       else {
           if (index % 2 == 0){
             if(!this.checkStartingPositionAndOrientation(line)) 
-              errors.push('error at line '+ index)
+              errors.push(index +' '+ Error.ERROR_POSITION_ORIENTATION)
           }
           else
              if(!this.checkInstructions(line)) 
-              errors.push('error at line '+ index)  
+              errors.push(index +' '+ Error.ERROR_INSTRUCTION)  
       }index++;
     }
     return errors;
