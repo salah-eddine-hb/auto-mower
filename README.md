@@ -2,6 +2,15 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.7.4.
 
+## Description of the project
+
+## Run the project
+
+  1 - Run `ng serve --open` `ng serve` and navigate to `http://localhost:4200/`
+  2 - Uplaod an input file with initial position and orientation of mowers
+  3 - Click submit to start processing the file
+  4 - See the result (new position and orientation of the mowers)
+  
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
