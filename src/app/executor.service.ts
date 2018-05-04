@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Instruction } from './instruction.enum';
-import { Orientation } from './orientation.enum';
 
+import { Instruction } from './instruction.enum';
 import { LoaderService } from './loader.service';
-import { Position } from './position.model';
 import { Mower } from './mower.model';
+import { Orientation } from './orientation.enum';
+import { Position } from './position.model';
 
 @Injectable()
 export class ExecutorService {

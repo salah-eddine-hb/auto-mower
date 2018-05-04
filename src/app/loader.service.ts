@@ -1,8 +1,9 @@
-import { Mower } from './mower.model';
-import { Position } from './position.model';
 import { Injectable } from '@angular/core';
-import { Orientation } from './orientation.enum';
+
 import { Instruction } from './instruction.enum';
+import { Mower } from './mower.model';
+import { Orientation } from './orientation.enum';
+import { Position } from './position.model';
 
 @Injectable()
 export class LoaderService {

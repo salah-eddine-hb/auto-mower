@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
-import { ValidatorService } from '../validator.service';
 import { ExecutorService } from '../executor.service';
-
-import { Mower } from '../mower.model';
 import { Error } from '../error.enum';
+import { Mower } from '../mower.model';
+import { ValidatorService } from '../validator.service';
 
 @Component({
   selector: 'app-file-uploader',
