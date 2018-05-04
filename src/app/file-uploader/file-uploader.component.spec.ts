@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FileUploaderComponent } from './file-uploader.component';
 import { ValidatorService } from '../validator.service';
 import { ExecutorService } from '../executor.service';
-import { OrientationEnum } from '../orientation.enum';
+import { Orientation } from '../orientation.enum';
 import { Position } from '../position.model';
 import { Mower } from '../mower.model';
 import { By } from '@angular/platform-browser';
@@ -20,8 +20,8 @@ describe('FileUploaderComponent', () => {
 
     validatorServiceSpy.validate.and.returnValue(['error at line 1']);
     executorServiceSpy.loadMowers.and.returnValue([
-      new Mower(new Position(2,2), OrientationEnum.NORD),
-      new Mower(new Position(3,3), OrientationEnum.SUD)]);
+      new Mower(new Position(2,2), Orientation.NORD),
+      new Mower(new Position(3,3), Orientation.SUD)]);
 
     TestBed.configureTestingModule({
       declarations: [ FileUploaderComponent ],

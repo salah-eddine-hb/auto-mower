@@ -1,4 +1,4 @@
-export enum OrientationEnum {
+export enum Orientation {
     NORD,
     EST,
     WEST,

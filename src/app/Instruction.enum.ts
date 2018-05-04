@@ -1,4 +1,4 @@
-export enum InstructionEnum {
+export enum Instruction {
     LEFT,
     RIGHT,
     FORWARD
