@@ -2,15 +2,15 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { Error } from '../utils/error.enum';
-import { ExecutorService } from '../services/executor.service';
+import { Error } from '../core/enums/error.enum';
+import { ExecutorService } from '../core/services/executor.service';
 import { FileUploaderComponent } from './file-uploader.component';
-import { Mower } from '../models/mower.model';
-import { Orientation } from '../utils/orientation.enum';
-import { Position } from '../models/position.model';
-import { ValidatorService } from '../services/validator.service';
+import { Mower } from '../core/models/mower.model';
+import { Orientation } from '../core/enums/orientation.enum';
+import { Position } from '../core/models/position.model';
+import { ValidatorService } from '../core/services/validator.service';
 
-describe('FileUploaderComponent', () => {
+describe('FileUploaderComponent - case where file have errors', () => {
 
   let component: FileUploaderComponent;
   let fixture: ComponentFixture<FileUploaderComponent>;
@@ -20,10 +20,8 @@ describe('FileUploaderComponent', () => {
 
   beforeEach(() => {
 
-    validatorServiceSpy.validate.and.returnValue(['error at line 1']);
-    executorServiceSpy.loadMowers.and.returnValue([
-      new Mower(new Position(2, 2), Orientation.NORD),
-      new Mower(new Position(3, 3), Orientation.SUD)]);
+    validatorServiceSpy.validate.and.returnValue(['1 ' + Error.ERROR_CORNER]);
+    executorServiceSpy.loadMowers.and.returnValue([]);
 
     TestBed.configureTestingModule({
       declarations: [FileUploaderComponent],
@@ -41,11 +39,11 @@ describe('FileUploaderComponent', () => {
     fixture.detectChanges();
   });
 
-  it('#should create', () => {
+  it('should create', () => {
     expect(component).toBeDefined();
   });
 
-  it('#should print print an error if their is no uploaded file', () => {
+  it('should get an error if their is no uploaded file', () => {
     const bannerElement: HTMLElement = fixture.nativeElement;
     const button = bannerElement.querySelector('button');
     button.click();
@@ -55,7 +53,7 @@ describe('FileUploaderComponent', () => {
     expect(component.Errors.pop()).toMatch(Error.ERROR_FILE);
   });
 
-  it('#should fire up the the click button event', async(() => {
+  it('should fire up the the click button event', async(() => {
     const bannerElement: HTMLElement = fixture.nativeElement;
     const button = bannerElement.querySelector('button');
     spyOn(component, 'openFile');
@@ -66,16 +64,16 @@ describe('FileUploaderComponent', () => {
     })
   }));
 
-  it('#should component errors array contain one element "error at line 1"', async(() => {
+  it('should get an error parsing corner value at line 1', async(() => {
     const bannerElement: HTMLElement = fixture.nativeElement;
     let file = new File(['556'], 'input.txt');
 
     component.openFile(file).then((errors) => {
-      expect(errors).toEqual(['error at line 1']);
+      expect(errors).toEqual(['1 Error parsing the corner value']);
     })
   }));
 
-  it('#should print an error at line 1 in the file', async(() => {
+  it('should print an error parsing corner value at line 1', async(() => {
     const bannerElement: HTMLElement = fixture.nativeElement;
     const input = bannerElement.querySelector('input');
     let file = new File(['556'], 'input.txt');
@@ -83,19 +81,61 @@ describe('FileUploaderComponent', () => {
     component.openFile(file).then((errors) => {
       fixture.detectChanges();
       const errs = bannerElement.querySelector('#errors');
-      expect(errs.textContent).toMatch(/error at line 1/i);
+      expect(errs.textContent).toMatch(/1 Error parsing the corner value/i);
     })
   }));
 
-  it('#should print all processed mowers as result', () => {
+});
+
+describe('FileUploaderComponent - upload a valid input file', () => {
+
+  let component: FileUploaderComponent;
+  let fixture: ComponentFixture<FileUploaderComponent>;
+
+  const validatorServiceSpy = jasmine.createSpyObj('ValidatorService', ['validate']);
+  const executorServiceSpy = jasmine.createSpyObj('ExecutorService', ['loadMowers']);
+
+  beforeEach(() => {
+
+    validatorServiceSpy.validate.and.returnValue([]);
+    executorServiceSpy.loadMowers.and.returnValue([new Mower(new Position(2, 2), Orientation.NORD)]);
+
+    TestBed.configureTestingModule({
+      declarations: [FileUploaderComponent],
+      providers: [
+        FileUploaderComponent,
+        { provide: ValidatorService, useValue: validatorServiceSpy },
+        { provide: ExecutorService, useValue: executorServiceSpy }
+      ]
+    });
+  });
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(FileUploaderComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should print the processed mowers as result X = val1, Y = val2, Orientation = val3', () => {
     const bannerElement: HTMLElement = fixture.nativeElement;
-    let file = new File(['55\n12N\nGAGAGAGAA\n44S\nGADG'], 'input.txt');
-    //validatorServiceSpy.validate.and.returnValue([]);
+    let file = new File(['55\n20N\nAA'], 'input.txt');
 
     component.openFile(file).then((errors) => {
       fixture.detectChanges();
-      const errs = bannerElement.querySelector('#errors');
-      expect(errs.textContent).toMatch(/error at line 1/i);
+      const result = bannerElement.querySelector('#mowers');
+      expect(result.textContent).toMatch(/X = 2, Y = 2, Orientation = 0/i);
+    })
+  });
+
+  it('should contain result as X Y Orientation', () => {
+    const bannerElement: HTMLElement = fixture.nativeElement;
+    let file = new File(['55\n20N\nAA'], 'input.txt');
+
+    component.openFile(file).then((errors) => {
+      fixture.detectChanges();
+      expect(component.Mowers.pop().Position.X).toEqual(2);
+      expect(component.Mowers.pop().Position.Y).toEqual(2);
+      expect(component.Mowers.pop().Orientation).toEqual(0);
     })
   });
 

@@ -1,10 +1,10 @@
 import { TestBed, inject } from '@angular/core/testing';
 
 import { ExecutorService } from './executor.service';
-import { Instruction } from '../utils/instruction.enum';
+import { Instruction } from '../enums/instruction.enum';
 import { LoaderService } from './loader.service';
 import { Mower } from '../models/mower.model';
-import { Orientation } from '../utils/orientation.enum';
+import { Orientation } from '../enums/orientation.enum';
 import { Position } from '../models/position.model';
 
 describe('ExecutorService test move forward', () => {

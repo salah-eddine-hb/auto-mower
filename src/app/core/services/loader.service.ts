@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 
-import { Instruction } from '../utils/instruction.enum';
+import { Instruction } from '../enums/instruction.enum';
 import { Mower } from '../models/mower.model';
-import { Orientation } from '../utils/orientation.enum';
+import { Orientation } from '../enums/orientation.enum';
 import { Position } from '../models/position.model';
 
 @Injectable()

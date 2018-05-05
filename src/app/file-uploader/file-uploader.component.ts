@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
-import { ExecutorService } from '../services/executor.service';
-import { Error } from '../utils/error.enum';
-import { Mower } from '../models/mower.model';
-import { ValidatorService } from '../services/validator.service';
+import { ExecutorService } from '../core/services/executor.service';
+import { Error } from '../core/enums/error.enum';
+import { Mower } from '../core/models/mower.model';
+import { ValidatorService } from '../core/services/validator.service';
 
 @Component({
   selector: 'app-file-uploader',
@@ -31,6 +31,7 @@ export class FileUploaderComponent implements OnInit {
             resolve(this.errors);
           else
             this.mowers = this.loadMowers(data);
+          resolve(this.mowers);
         }
         fileReader.readAsText(file);
       } else {
@@ -54,6 +55,10 @@ export class FileUploaderComponent implements OnInit {
 
   public get Errors() {
     return this.errors;
+  }
+
+  public get Mowers() {
+    return this.mowers;
   }
 
 }

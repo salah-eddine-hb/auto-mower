@@ -1,5 +1,5 @@
-import { Instruction } from '../utils/instruction.enum';
-import { Orientation } from '../utils/orientation.enum';
+import { Instruction } from '../enums/instruction.enum';
+import { Orientation } from '../enums/orientation.enum';
 import { Position } from './position.model';
 
 export class Mower {
