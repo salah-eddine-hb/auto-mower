@@ -116,27 +116,75 @@ describe('FileUploaderComponent - upload a valid input file', () => {
     fixture.detectChanges();
   });
 
-  it('should print the processed mowers as result X = val1, Y = val2, Orientation = val3', () => {
+  it('should print the processed mowers as result X = val1, Y = val2, Orientation = val3', async(() => {
     const bannerElement: HTMLElement = fixture.nativeElement;
     let file = new File(['55\n20N\nAA'], 'input.txt');
 
-    component.openFile(file).then((errors) => {
+    component.openFile(file).then((mowers) => {
       fixture.detectChanges();
       const result = bannerElement.querySelector('#mowers');
       expect(result.textContent).toMatch(/X = 2, Y = 2, Orientation = 0/i);
     })
-  });
+  }));
 
-  it('should contain result as X Y Orientation', () => {
+  it('should contain result as X Y Orientation', async(() => {
+    executorServiceSpy.loadMowers.and.returnValue([new Mower(new Position(2, 2), Orientation.NORD),
+      new Mower(new Position(2, 2), Orientation.NORD)]);
     const bannerElement: HTMLElement = fixture.nativeElement;
     let file = new File(['55\n20N\nAA'], 'input.txt');
 
-    component.openFile(file).then((errors) => {
+    component.openFile(file).then((mowers) => {
       fixture.detectChanges();
-      expect(component.Mowers.pop().Position.X).toEqual(2);
-      expect(component.Mowers.pop().Position.Y).toEqual(2);
-      expect(component.Mowers.pop().Orientation).toEqual(0);
+      expect(component.Mowers[0].Position.X).toEqual(2);
+      expect(component.Mowers[0].Position.Y).toEqual(2);
+      expect(component.Mowers[0].Orientation).toEqual(0);
     })
+  }));
+});
+
+describe('FileUploaderComponent - upload a valid input file with a list of mowers', () => {
+  let component: FileUploaderComponent;
+  let fixture: ComponentFixture<FileUploaderComponent>;
+
+  const validatorServiceSpy = jasmine.createSpyObj('ValidatorService', ['validate']);
+  const executorServiceSpy = jasmine.createSpyObj('ExecutorService', ['loadMowers']);
+
+  beforeEach(() => {
+
+    validatorServiceSpy.validate.and.returnValue([]);
+    executorServiceSpy.loadMowers.and.returnValue(
+      [
+        new Mower(new Position(2, 2), Orientation.NORD),
+        new Mower(new Position(3, 3), Orientation.NORD)
+    ]);
+
+    TestBed.configureTestingModule({
+      declarations: [FileUploaderComponent],
+      providers: [
+        FileUploaderComponent,
+        { provide: ValidatorService, useValue: validatorServiceSpy },
+        { provide: ExecutorService, useValue: executorServiceSpy }
+      ]
+    });
   });
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(FileUploaderComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should print two processed mowers as result X = val1, Y = val2, Orientation = val3', async(() => {
+    
+    const bannerElement: HTMLElement = fixture.nativeElement;
+    let file = new File(['55\n20N\nAA\n23S\nA'], 'input.txt');
+
+      component.openFile(file).then((mowers) => {
+      fixture.detectChanges();
+      const result = bannerElement.querySelector('#mowers');
+      expect(result.textContent).toMatch(/(\s|\n)*X = 2, Y = 2, Orientation = 0(\s|\n)*X = 3, Y = 3, Orientation = 0(\s|\n)*/i);
+    })
+  }));
+
 
 });
