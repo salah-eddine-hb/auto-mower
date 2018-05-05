@@ -6,7 +6,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 Move an automower in a square surfaces using an input file. Mower's position is represented by coordinates (X,Y) and a characters indicate the orientation according to cardinal notations (N,E,W,S).
 To control the mower, we send a simple sequence of characters. Possibles characters are L,R,F. L and R turn the mower at 90° on the left or right without moving the mower.
-To program the mower, we can provide an input file constructed as follows:
+To program the mower, we can provide an input file constructed as follows :
 The first line correspond to the coordinate of the upper right corner of the lawn (XY).
 After that each mower has 2 next lines:
 The first line give mower's starting position and orientation as "X Y O". 
