@@ -59,6 +59,11 @@ describe('ValidatorService test starting position and orientation', () => {
     expect(service.validate(testString)).toEqual([]);
   }));
 
+  it('55\n01N should return an error at line 2 the init position passe the corner position', inject([ValidatorService], (service: ValidatorService) => {
+    let testString = '55\n66N\nAA';
+    expect(service.validate(testString)).toEqual([]);
+  }));
+
 });
 
 describe('ValidatorService test instructions', () => {
@@ -97,6 +102,7 @@ describe('ValidatorService test all in one', () => {
   it('55\n01B\nADGGR should return an error at lines 2 and 3', inject([ValidatorService], (service: ValidatorService) => {
     let testString = '55\n01B\nADGGR';
     let result = service.validate(testString);
+
     expect(result.pop()).toEqual('3 ' + Error.ERROR_INSTRUCTION);
     expect(result.pop()).toEqual('2 ' + Error.ERROR_POSITION_ORIENTATION);
   }));
@@ -104,6 +110,7 @@ describe('ValidatorService test all in one', () => {
   it('55\n01B\nADGGR\n should return an error at lines 2, 3 and 4', inject([ValidatorService], (service: ValidatorService) => {
     let testString = '55\n01B\nADGGR\n';
     let result = service.validate(testString);
+
     expect(result.pop()).toEqual('4 ' + Error.ERROR_POSITION_ORIENTATION);
     expect(result.pop()).toEqual('3 ' + Error.ERROR_INSTRUCTION);
     expect(result.pop()).toEqual('2 ' + Error.ERROR_POSITION_ORIENTATION);
@@ -112,6 +119,7 @@ describe('ValidatorService test all in one', () => {
   it('55\n01B\nADGGR\n should return an error at lines 2, 3 and 4', inject([ValidatorService], (service: ValidatorService) => {
     let testString = '55\n01B\nADGGR\n';
     let result = service.validate(testString);
+
     expect(result.pop()).toEqual('4 ' + Error.ERROR_POSITION_ORIENTATION);
     expect(result.pop()).toEqual('3 ' + Error.ERROR_INSTRUCTION);
     expect(result.pop()).toEqual('2 ' + Error.ERROR_POSITION_ORIENTATION);

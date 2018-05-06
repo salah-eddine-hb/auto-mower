@@ -41,4 +41,14 @@ describe('LoaderService', () => {
     expect(function(){service.loadMowers(testString)}).toThrow(new Error("Error parsing mower orientation data from file"));
   }));
 
+  it('Should throw an error if their is an invalid position value that passe the corner value', inject([LoaderService], (service: LoaderService) => {
+    let testString = '55\n66S\nAA\n33N\nAA';
+    expect(function(){service.loadMowers(testString)}).toThrow(new Error("Error parsing mower position data from file"));
+  }));
+
+  it('Should throw an error if their is an invalid instruction value', inject([LoaderService], (service: LoaderService) => {
+    let testString = '55\n22N\nAO\n33N\nAA';
+    expect(function(){service.loadMowers(testString)}).toThrow(new Error("Error parsing mower instructions data from file"));
+  }));
+
 });

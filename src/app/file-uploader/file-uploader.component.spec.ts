@@ -126,11 +126,12 @@ describe('FileUploaderComponent - case where file have errors', () => {
     
     const bannerElement: HTMLElement = fixture.nativeElement;
     let file = new File(['55\n20N\nAA\n23S\nA'], 'input.txt');
+    let match = /(\s|\n)*X = 2, Y = 2, Orientation = 0(\s|\n)*X = 3, Y = 3, Orientation = 0(\s|\n)*/i;
 
       component.openFile(file).then((mowers) => {
       fixture.detectChanges();
       const result = bannerElement.querySelector('#mowers');
-      expect(result.textContent).toMatch(/(\s|\n)*X = 2, Y = 2, Orientation = 0(\s|\n)*X = 3, Y = 3, Orientation = 0(\s|\n)*/i);
+      expect(result.textContent).toMatch(match);
     })
   }));
 

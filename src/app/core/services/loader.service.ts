@@ -100,7 +100,7 @@ export class LoaderService {
                     instructions.push(Instruction.FORWARD);
                     break;
                 default:
-                    throw new Error("Error parsing mower instructions from file");
+                    throw new Error("Error parsing mower instructions data from file");
             }
         } return instructions;
     }
