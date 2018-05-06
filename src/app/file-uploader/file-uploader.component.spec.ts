@@ -85,38 +85,10 @@ describe('FileUploaderComponent - case where file have errors', () => {
     })
   }));
 
-});
-
-describe('FileUploaderComponent - upload a valid input file', () => {
-
-  let component: FileUploaderComponent;
-  let fixture: ComponentFixture<FileUploaderComponent>;
-
-  const validatorServiceSpy = jasmine.createSpyObj('ValidatorService', ['validate']);
-  const executorServiceSpy = jasmine.createSpyObj('ExecutorService', ['loadMowers']);
-
-  beforeEach(() => {
-
+  it('should print the processed mowers as result X = val1, Y = val2, Orientation = val3', async(() => {
     validatorServiceSpy.validate.and.returnValue([]);
     executorServiceSpy.loadMowers.and.returnValue([new Mower(new Position(2, 2), Orientation.NORD)]);
 
-    TestBed.configureTestingModule({
-      declarations: [FileUploaderComponent],
-      providers: [
-        FileUploaderComponent,
-        { provide: ValidatorService, useValue: validatorServiceSpy },
-        { provide: ExecutorService, useValue: executorServiceSpy }
-      ]
-    });
-  });
-
-  beforeEach(() => {
-    fixture = TestBed.createComponent(FileUploaderComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
-
-  it('should print the processed mowers as result X = val1, Y = val2, Orientation = val3', async(() => {
     const bannerElement: HTMLElement = fixture.nativeElement;
     let file = new File(['55\n20N\nAA'], 'input.txt');
 
@@ -128,6 +100,9 @@ describe('FileUploaderComponent - upload a valid input file', () => {
   }));
 
   it('should contain result as X Y Orientation', async(() => {
+    validatorServiceSpy.validate.and.returnValue([]);
+    executorServiceSpy.loadMowers.and.returnValue([new Mower(new Position(2, 2), Orientation.NORD)]);
+
     executorServiceSpy.loadMowers.and.returnValue([new Mower(new Position(2, 2), Orientation.NORD),
       new Mower(new Position(2, 2), Orientation.NORD)]);
     const bannerElement: HTMLElement = fixture.nativeElement;
@@ -140,41 +115,14 @@ describe('FileUploaderComponent - upload a valid input file', () => {
       expect(component.Mowers[0].Orientation).toEqual(0);
     })
   }));
-});
 
-describe('FileUploaderComponent - upload a valid input file with a list of mowers', () => {
-  let component: FileUploaderComponent;
-  let fixture: ComponentFixture<FileUploaderComponent>;
-
-  const validatorServiceSpy = jasmine.createSpyObj('ValidatorService', ['validate']);
-  const executorServiceSpy = jasmine.createSpyObj('ExecutorService', ['loadMowers']);
-
-  beforeEach(() => {
-
+  it('should print two processed mowers as result X = val1, Y = val2, Orientation = val3', async(() => {
     validatorServiceSpy.validate.and.returnValue([]);
     executorServiceSpy.loadMowers.and.returnValue(
       [
         new Mower(new Position(2, 2), Orientation.NORD),
         new Mower(new Position(3, 3), Orientation.NORD)
     ]);
-
-    TestBed.configureTestingModule({
-      declarations: [FileUploaderComponent],
-      providers: [
-        FileUploaderComponent,
-        { provide: ValidatorService, useValue: validatorServiceSpy },
-        { provide: ExecutorService, useValue: executorServiceSpy }
-      ]
-    });
-  });
-
-  beforeEach(() => {
-    fixture = TestBed.createComponent(FileUploaderComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
-
-  it('should print two processed mowers as result X = val1, Y = val2, Orientation = val3', async(() => {
     
     const bannerElement: HTMLElement = fixture.nativeElement;
     let file = new File(['55\n20N\nAA\n23S\nA'], 'input.txt');
@@ -185,6 +133,5 @@ describe('FileUploaderComponent - upload a valid input file with a list of mower
       expect(result.textContent).toMatch(/(\s|\n)*X = 2, Y = 2, Orientation = 0(\s|\n)*X = 3, Y = 3, Orientation = 0(\s|\n)*/i);
     })
   }));
-
 
 });

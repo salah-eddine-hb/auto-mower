@@ -24,7 +24,7 @@ export class LoaderService {
         for (let line of lines) {
             if (index == 1) corner = this.getCorners(line);
             else {
-                if (index % 2 == 0) mower = this.getMower(line);
+                if (index % 2 == 0) mower = this.getMower(line,corner);
                 else {
                     mower.Instructions = this.getCommands(line);
                     mowers.push(mower);
@@ -48,12 +48,18 @@ export class LoaderService {
     * @param data - String that contain mower position and orientation as "XYO" form 
     * @returns New Mower object
     */
-    private getMower(data: string): Mower {
+    private getMower(data: string, corner: Position): Mower {
         let mower: Mower;
         let position: Position;
         let orientation: Orientation;
 
-        position = new Position(parseInt(data.charAt(0)), parseInt(data.charAt(1)));
+        if((parseInt(data.charAt(0))>0 && parseInt(data.charAt(0))<=corner.X)
+            && (parseInt(data.charAt(1))>0 && parseInt(data.charAt(1))<=corner.Y)){
+                position = new Position(parseInt(data.charAt(0)), parseInt(data.charAt(1)));
+        }else{
+            throw new Error("Error parsing mower position data from file");
+        }
+
         switch (data.charAt(2)) {
             case 'N':
                 orientation = Orientation.NORD;
@@ -68,7 +74,7 @@ export class LoaderService {
                 orientation = Orientation.WEST;
                 break;
             default:
-                throw new Error("Error reading data from file");
+                throw new Error("Error parsing mower orientation data from file");
         }
         mower = new Mower(position, orientation);
         return mower;
@@ -94,7 +100,7 @@ export class LoaderService {
                     instructions.push(Instruction.FORWARD);
                     break;
                 default:
-                    throw new Error("Error reading data from file");
+                    throw new Error("Error parsing mower instructions from file");
             }
         } return instructions;
     }
