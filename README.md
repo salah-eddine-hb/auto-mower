@@ -2,6 +2,17 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.7.4.
 
+## Table of Contents
+
+* [Description of the project]
+* [Run the project]
+* [Development server]
+* [Code scaffolding]
+* [Build]
+* [Running unit tests]
+* [Running end-to-end tests]
+* [Further help]
+
 ## Description of the project
 
 Move an automower in a square surfaces using an input file. Mower's position is represented by coordinates (X,Y) and a characters indicate the orientation according to cardinal notations (N,E,W,S).
