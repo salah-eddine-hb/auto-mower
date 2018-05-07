@@ -4,14 +4,14 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Table of Contents
 
-* [Description of the project]
-* [Run the project]
-* [Development server]
-* [Code scaffolding]
-* [Build]
-* [Running unit tests]
-* [Running end-to-end tests]
-* [Further help]
+* Description of the project
+* Run the project
+* Development server
+* Code scaffolding
+* Build
+* Running unit tests
+* Running end-to-end tests
+* Further help
 
 ## Description of the project
 
