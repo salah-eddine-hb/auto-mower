@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
-import { ExecutorService } from '../core/services/executor.service';
-import { Error } from '../core/enums/error.enum';
-import { Mower } from '../core/models/mower.model';
-import { ValidatorService } from '../core/services/validator.service';
+import { ExecutorService } from '../shared/services/executor.service';
+import { Error } from '../shared/enums/error.enum';
+import { Mower } from '../shared/models/mower.model';
+import { ValidatorService } from '../shared/services/validator.service';
 
 @Component({
   selector: 'app-file-uploader',
