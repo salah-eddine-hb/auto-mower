@@ -14,6 +14,9 @@ The second line give instructions to the mower to go throughout the lawn.
 
 ## Run the project
 
+  - `git clone https://github.com/senyou01/auto-mower.git`
+  - `cd auto-mower`
+  - `npm intall` to get all the packages in packages.json
   - Run `ng serve --open` or `ng serve` and navigate to `http://localhost:4200/`
   - Uplaod an input file with initial position and orientation of mowers
   - Click submit to start processing the file
