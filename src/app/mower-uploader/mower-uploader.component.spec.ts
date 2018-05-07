@@ -2,13 +2,13 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { Error } from '../shared/enums/error.enum';
-import { ExecutorService } from '../shared/services/executor.service';
+import { Error } from '../core/enums/error.enum';
+import { ExecutorService } from '../core/services/executor.service';
 import { MowerUploaderComponent } from './mower-uploader.component';
-import { Mower } from '../shared/models/mower.model';
-import { Orientation } from '../shared/enums/orientation.enum';
-import { Position } from '../shared/models/position.model';
-import { ValidatorService } from '../shared/services/validator.service';
+import { Mower } from '../core/models/mower.model';
+import { Orientation } from '../core/enums/orientation.enum';
+import { Position } from '../core/models/position.model';
+import { ValidatorService } from '../core/services/validator.service';
 
 describe('MowerUploaderComponent - case where file have errors', () => {
 

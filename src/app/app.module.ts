@@ -3,10 +3,11 @@ import { NgModule } from '@angular/core';
 
 
 import { AppComponent } from './app.component';
+import { CoreModule } from './core/core.module';
 import { MowerUploaderComponent } from './mower-uploader/mower-uploader.component';
-import { ValidatorService } from './shared/services/validator.service';
-import { ExecutorService } from './shared/services/executor.service';
-import { LoaderService } from './shared/services/loader.service';
+//import { ValidatorService } from './core/services/validator.service';
+//import { ExecutorService } from './core/services/executor.service';
+//import { LoaderService } from './core/services/loader.service';
 
 
 @NgModule({
@@ -15,12 +16,11 @@ import { LoaderService } from './shared/services/loader.service';
     MowerUploaderComponent,
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    CoreModule
   ],
   providers: [
-    ValidatorService,
-    ExecutorService,
-    LoaderService
+
   ],
   bootstrap: [AppComponent]
 })

@@ -2,9 +2,9 @@ import { TestBed, async } from '@angular/core/testing';
 
 import { AppComponent } from './app.component';
 import { MowerUploaderComponent } from './mower-uploader/mower-uploader.component';
-import { ValidatorService } from './shared/services/validator.service';
-import { ExecutorService } from './shared/services/executor.service';
-import { LoaderService } from './shared/services/loader.service';
+import { ValidatorService } from './core/services/validator.service';
+import { ExecutorService } from './core/services/executor.service';
+import { LoaderService } from './core/services/loader.service';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
