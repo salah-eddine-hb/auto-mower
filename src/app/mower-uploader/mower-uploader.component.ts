@@ -6,11 +6,11 @@ import { Mower } from '../shared/models/mower.model';
 import { ValidatorService } from '../shared/services/validator.service';
 
 @Component({
-  selector: 'app-file-uploader',
-  templateUrl: './file-uploader.component.html',
-  styleUrls: ['./file-uploader.component.css']
+  selector: 'app-mower-uploader',
+  templateUrl: './mower-uploader.component.html',
+  styleUrls: ['./mower-uploader.component.css']
 })
-export class FileUploaderComponent implements OnInit {
+export class MowerUploaderComponent implements OnInit {
   private mowers: Mower[];
   private errors: string[];
 

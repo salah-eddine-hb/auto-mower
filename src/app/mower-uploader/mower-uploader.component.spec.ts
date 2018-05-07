@@ -4,16 +4,16 @@ import { DebugElement } from '@angular/core';
 
 import { Error } from '../shared/enums/error.enum';
 import { ExecutorService } from '../shared/services/executor.service';
-import { FileUploaderComponent } from './file-uploader.component';
+import { MowerUploaderComponent } from './mower-uploader.component';
 import { Mower } from '../shared/models/mower.model';
 import { Orientation } from '../shared/enums/orientation.enum';
 import { Position } from '../shared/models/position.model';
 import { ValidatorService } from '../shared/services/validator.service';
 
-describe('FileUploaderComponent - case where file have errors', () => {
+describe('MowerUploaderComponent - case where file have errors', () => {
 
-  let component: FileUploaderComponent;
-  let fixture: ComponentFixture<FileUploaderComponent>;
+  let component: MowerUploaderComponent;
+  let fixture: ComponentFixture<MowerUploaderComponent>;
 
   const validatorServiceSpy = jasmine.createSpyObj('ValidatorService', ['validate']);
   const executorServiceSpy = jasmine.createSpyObj('ExecutorService', ['loadMowers']);
@@ -24,9 +24,9 @@ describe('FileUploaderComponent - case where file have errors', () => {
     executorServiceSpy.loadMowers.and.returnValue([]);
 
     TestBed.configureTestingModule({
-      declarations: [FileUploaderComponent],
+      declarations: [MowerUploaderComponent],
       providers: [
-        FileUploaderComponent,
+        MowerUploaderComponent,
         { provide: ValidatorService, useValue: validatorServiceSpy },
         { provide: ExecutorService, useValue: executorServiceSpy }
       ]
@@ -34,7 +34,7 @@ describe('FileUploaderComponent - case where file have errors', () => {
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(FileUploaderComponent);
+    fixture = TestBed.createComponent(MowerUploaderComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
