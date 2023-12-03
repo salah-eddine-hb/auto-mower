@@ -16,7 +16,14 @@ jobs:
         run: echo "Job 2 fail"
   job-3:
     runs-on: ubuntu-latest
-    needs: [ job-1, job-2 ]
+    needs: [ job-1 ]
+    steps:
+      - uses: actions/checkout@v9
+      - name: my-step
+        run: echo "Job 2 fail"
+  job-4:
+    runs-on: ubuntu-latest
+    needs: [ job-1, job-2, job-3 ]
     if: ${{ failure() }}
     steps:
       - name: my-step
