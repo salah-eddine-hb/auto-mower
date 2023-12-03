@@ -9,7 +9,7 @@ jobs:
         run: echo "Job fail"
   job-2:
     runs-on: ubuntu-latest
-    if: ${{ failure() }}
+    #if: ${{ failure() }}
     steps:
       - name: my-step
         run: echo "Job error"
