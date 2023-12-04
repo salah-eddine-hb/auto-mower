@@ -18,6 +18,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: create pr
         run: |
-          echo ${{join(steps.splitt.outputs.*, '-')}}
+          echo ${{join(steps.splitt.outputs.split-array, '-')}}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
