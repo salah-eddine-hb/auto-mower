@@ -1,5 +1,8 @@
 name: Test getting branch name
-on: push
+on: 
+  push:
+    branches:
+      - 'release/**'
 
 jobs:
   create-pr:
