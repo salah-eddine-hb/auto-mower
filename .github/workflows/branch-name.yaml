@@ -15,7 +15,7 @@ jobs:
       - name: split branch name
         id: splitt
         run: |
-          CURRENT_RELEASE=. read -r v1 v2 v3 <<< "$GITHUB_REF_NAME"    # split into (integer) components
+          IFS=. read -r v1 v2 v3 <<< "$GITHUB_REF_NAME"                # split into (integer) components
           ((v2++))                                                     # increment release version
           NEXT_RELEASE="${v1}.${v2}.${v3}"                             # paste back together
           echo "::set-output name=next_release::$NEXT_RELEASE"
