@@ -1,4 +1,4 @@
-name: Test branch name
+name: Test getting branch name
 on:
   push:
     branches:
