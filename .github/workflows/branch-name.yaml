@@ -22,5 +22,5 @@ jobs:
         #echo "$(echo $GITHUB_REF_NAME | sed 's/\./\n/g')"
       - name: create prr
         run: |
-          echo ${{steps.splitt.outputs.patch}}
+          echo ${{ steps.splitt.outputs.patch }}
         #echo ${{join(steps.splitt.outputs.split-array, '-')}}
