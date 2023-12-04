@@ -1,4 +1,4 @@
-name: Test getting branch name
+name: Test getting branch name (release 1)
 on: 
   push:
     branches:
