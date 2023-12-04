@@ -15,7 +15,7 @@ jobs:
       - name: split branch name
         id: splitt
         run: |
-          echo "split-array=${{ github.ref_name }} $(| sed 's/\./\n/g')"
+          echo "split-array=$(cat $GITHUB_REF_NAME | sed 's/\./\n/g')"
       - name: create prr
         run: |
           echo ${{join(steps.splitt.outputs.split-array, '-')}}
