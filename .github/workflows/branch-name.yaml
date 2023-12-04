@@ -18,7 +18,7 @@ jobs:
           IFS=. read -r v1 v2 v3 <<< "$GITHUB_REF_NAME"    # split into (integer) components
           ((v2++))                                         # do the math
           patch="${v1}.${v2}.${v3}"                        # paste back together
-          echo ::set-output name=release::"$patch"
+          echo "::set-output name=release::$(echo $patch)"
         #echo "$(echo $GITHUB_REF_NAME | sed 's/\./\n/g')"
       - name: create prr
         run: |
