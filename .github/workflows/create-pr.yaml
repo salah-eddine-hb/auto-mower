@@ -1,0 +1,26 @@
+name: Create automatic PR
+run-name: Create automatic PR from branch @${{ github.ref_name }} to the new branch
+on:
+  push:
+    branches:
+      - 'release/**'
+
+jobs:
+  create-pr:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Git checkout
+        uses: actions/checkout@v3
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: find next release
+        id: next_release_step
+        run: |
+          IFS=. read -r v1 v2 v3 <<< "$GITHUB_REF_NAME"
+          if [ v2 -lt 12 ]; then ((v2++)) else ((v1++)) fi
+          NEXT_RELEASE="${v1}.${v2}.${v3}"
+          echo "next_release=$NEXT_RELEASE" >> $GITHUB_OUTPUT
+      - name: create pull request
+        run: |
+          echo $GITHUB_OUTPUT
+          # gh pr create --base ${{ steps.next_release_step.outputs.next_release }} --title 'Merge $GITHUB_REF_NAME into ${{ steps.next_release_step.outputs.next_release }}' --body 'Merge $GITHUB_REF_NAME into ${{ steps.next_release_step.outputs.next_release }}'
