@@ -1,9 +1,9 @@
 name: Example workflow
 
-# on:
-#   push:
-#     branches:
-#       - 'release/**'
+on:
+  push:
+    branches:
+      - 'release/**'
 
 jobs:
   example:
