@@ -26,4 +26,14 @@ jobs:
       - name: create pull request
         run: |
           echo "Create PR for $GITHUB_OUTPUT"
-          gh pr create --base ${{ steps.next_release_step.outputs.next_release }} --title 'Merge $GITHUB_REF_NAME into ${{ steps.next_release_step.outputs.next_release }}' --body 'Merge $GITHUB_REF_NAME into ${{ steps.next_release_step.outputs.next_release }}'
+          # gh pr create --base ${{ steps.next_release_step.outputs.next_release }} --title 'Merge $GITHUB_REF_NAME into ${{ steps.next_release_step.outputs.next_release }}' --body 'Merge $GITHUB_REF_NAME into ${{ steps.next_release_step.outputs.next_release }}'
+
+      - name: Get next version
+        id: get_next_version
+        uses: thenativeweb/get-next-version@main
+        with:
+          prefix: 'release/' # optional, defaults to ''
+      - name: Show the next version
+        run: |
+          echo ${{ steps.get_next_version.outputs.version }}
+          echo ${{ steps.get_next_version.outputs.hasNextVersion }}    
