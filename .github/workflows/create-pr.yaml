@@ -25,5 +25,5 @@ jobs:
           echo "next_release=$NEXT_RELEASE" >> $GITHUB_OUTPUT
       - name: create pull request
         run: |
-          echo $GITHUB_OUTPUT
-          # gh pr create --base ${{ steps.next_release_step.outputs.next_release }} --title 'Merge $GITHUB_REF_NAME into ${{ steps.next_release_step.outputs.next_release }}' --body 'Merge $GITHUB_REF_NAME into ${{ steps.next_release_step.outputs.next_release }}'
+          echo "Create PR for $GITHUB_OUTPUT"
+          gh pr create --base ${{ steps.next_release_step.outputs.next_release }} --title 'Merge $GITHUB_REF_NAME into ${{ steps.next_release_step.outputs.next_release }}' --body 'Merge $GITHUB_REF_NAME into ${{ steps.next_release_step.outputs.next_release }}'
