@@ -20,8 +20,8 @@ jobs:
           echo "value of v1 ${v1}"
           echo "value of v2 ${v2}"
           if [ ${v2} -lt 12 ]; then echo "yesssss"; else echo "Nooooo"; fi
-          if [ ${v2} -lt 12 ]; then ((v2++)); else ((v1++)); fi
-          NEXT_RELEASE="${v1}.${v2}.${v3}"
+          if [ ${v2} -lt 12 ]; then ((v2++)); NEXT_RELEASE="${v1}.${v2}.${v3}"; else IFS=/ read -r t1 t2 <<< "${v1}"; ((t2++)); NEXT_RELEASE="release/${t2}.${v2}.${v3}"; fi
+          echo $NEXT_RELEASE
           echo "next_release=$NEXT_RELEASE" >> $GITHUB_OUTPUT
       - name: create pull request
         run: |
