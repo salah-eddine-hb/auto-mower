@@ -17,6 +17,9 @@ jobs:
         id: next_release_step
         run: |
           IFS=. read -r v1 v2 v3 <<< "$GITHUB_REF_NAME"
+          echo "value of v1 ${v1}"
+          echo "value of v2 ${v2}"
+          if [ ${v2} -lt 12 ]; then echo "yesssss" else echo "Nooooo" fin
           if [ ${v2} -lt 12 ]; then ((v2++)) else ((v1++)) fi
           NEXT_RELEASE="${v1}.${v2}.${v3}"
           echo "next_release=$NEXT_RELEASE" >> $GITHUB_OUTPUT
